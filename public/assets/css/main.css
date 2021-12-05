@@ -1,0 +1,30 @@
+.red{
+    color: #b70b0b;
+}
+.choosse{
+    float: right;
+    display: table !important;
+    background: #f7f7f7;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    width: auto;
+    margin: 0px 6px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+.choosse i{
+    float: right;
+    margin: 4px 6px;
+    display: none;
+    margin-right: 0;
+}
+.choosse.clickable {
+    background: #23c58f;
+    color: #fff;
+    box-shadow: 2px 2px 6px 0px #0000001c;
+}
+
+input.hide{
+    display: none;
+}
