@@ -32,7 +32,7 @@ Route::get('language/{locale}', function ($locale) {
 
 
 
-Route::domain('{account}.'.env('domain'))->group(function ($account) {
+Route::domain('{account}.'.env('DOMAIN'))->group(function ($account) {
 
     Route::middleware(['auth','CheckSettings'])->group(function () {
 
