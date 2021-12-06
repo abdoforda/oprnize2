@@ -34,7 +34,7 @@ Auth::routes();
     
 Route::domain('{account}.oprnize.com')->group(function ($account) {
 
-    Route::middleware(['auth','SubDomainCheck','CheckSettings'])->group(function () {
+    Route::middleware(['SubDomainCheck','auth','CheckSettings'])->group(function () {
 
         Route::get('/', function ($account) {
             return "s >".$account;
