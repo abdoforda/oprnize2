@@ -30,7 +30,7 @@ Route::get('language/{locale}', function ($locale) {
 });
 
 
-Auth::routes();
+
     
 Route::domain('{account}.oprnize.com')->group(function ($account) {
 
@@ -68,3 +68,6 @@ Route::get('/clear', function () {
     Artisan::call('view:clear');
     return "Artisan";
 });
+
+
+Auth::routes();
