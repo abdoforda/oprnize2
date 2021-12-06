@@ -32,7 +32,7 @@ Route::get('language/{locale}', function ($locale) {
 
 Auth::routes();
     
-Route::domain('{account}.localhost')->group(function ($account) {
+Route::domain('{account}.oprnize.com')->group(function ($account) {
 
     Route::middleware(['auth','SubDomainCheck','CheckSettings'])->group(function () {
 
@@ -64,3 +64,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('workspace', 'Auth\LoginController@workspace');
 Route::post('/checkdomain', 'Auth\LoginController@checkdomain')->name('checkdomain');
 
+
+Route::get('/clear', function () {
+    Artisan::call('config:cache');
+    //Artisan::call('route:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    return "Artisan";
+});

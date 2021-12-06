@@ -22,7 +22,12 @@
                                         <img src="assets/images/logo-dark.png" height="22" alt="logo">
                                     </a>
 
-                                    <h5 class="text-primary mb-2 mt-4">{{__('You welcome in')}} {{ $ex[0] }}</h5>
+                                    @php
+                                        $domain = $_SERVER['HTTP_HOST'];
+                                        $domain = explode('.',$domain);
+
+                                    @endphp
+                                    <h5 class="text-primary mb-2 mt-4">{{__('You welcome in')}} {{ $domain[0] }}</h5>
                                     
                                 </div>
 
