@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('delete', function () {
     $user = User::find(2);
     return $user->delete();
@@ -31,10 +32,9 @@ Route::get('language/{locale}', function ($locale) {
 
 
 
-    
-Route::domain('{account}.oprnize.com')->group(function ($account) {
+Route::domain('{account}.'.env('domain'))->group(function ($account) {
 
-    Route::middleware(['SubDomainCheck','auth','CheckSettings'])->group(function () {
+    Route::middleware(['auth','CheckSettings'])->group(function () {
 
         Route::get('/', function ($account) {
             return "s >".$account;
@@ -46,9 +46,7 @@ Route::domain('{account}.oprnize.com')->group(function ($account) {
 }); // {account}.localhost
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::post('/register', 'Auth\RegisterController@register')->name('register2');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
@@ -67,6 +65,11 @@ Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
     return "Artisan";
+});
+
+
+Route::get('/', function () {
+    return view('welcome');
 });
 
 

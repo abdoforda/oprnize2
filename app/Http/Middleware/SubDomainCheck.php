@@ -17,14 +17,18 @@ class SubDomainCheck
     public function handle($request, Closure $next)
     {
 
+        $host = $request->getHttpHost();
+        $ex = explode('.',$host);
+        $subdomain = $ex[0];
+
+        if($request->getRequestUri() == "/404" or $subdomain == env('DOMAIN_check')){
+            return $next($request);
+        }
 
         if($request->getRequestUri() == "/register"){
             return redirect('404');
         }
         
-        $host = $request->getHttpHost();
-        $ex = explode('.',$host);
-        $subdomain = $ex[0];
         $user = User::where('domain',$subdomain)->first();
         if($user){
             session()->flash('domain', $subdomain);
