@@ -43,13 +43,7 @@ Route::domain('{account}.oprnize.com')->group(function ($account) {
 
     }); 
 
-    
-
-
-    
-
 }); // {account}.localhost
-
 
 
 Route::get('/', function () {
@@ -59,7 +53,9 @@ Route::get('/', function () {
 Route::post('/register', 'Auth\RegisterController@register')->name('register2');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return redirect('/');
+})->name('home');
 
 Route::get('workspace', 'Auth\LoginController@workspace');
 Route::post('/checkdomain', 'Auth\LoginController@checkdomain')->name('checkdomain');
