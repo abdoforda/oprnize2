@@ -25,7 +25,7 @@ class SubDomainCheck
         $ex = explode('.',$host);
         $subdomain = $ex[0];
 
-        if(count($ex) == 3){
+        if(count($ex) == 2){
             if($request->getRequestUri() == "/register"){
                 return redirect('404');
             }
