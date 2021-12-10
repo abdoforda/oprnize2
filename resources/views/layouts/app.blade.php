@@ -14,11 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
 
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap-rtl.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap-rtl.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app-rtl.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app-rtl.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     @yield('style')
 </head>
 
@@ -156,19 +156,19 @@
     <!-- end Account pages -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
     <!-- Plugins js-->
-    <script src="assets/libs/jquery-countdown/jquery.countdown.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery-countdown/jquery.countdown.min.js') }}"></script>
 
     <!-- Countdown js -->
-    <script src="assets/js/pages/coming-soon.init.js"></script>
+    <script src="{{ asset('assets/js/pages/coming-soon.init.js') }}"></script>
 
-    <script src="assets/js/app.js"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/ajax.form.js') }}"></script>
     @yield('script')
 </body>

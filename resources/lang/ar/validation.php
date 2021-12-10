@@ -106,7 +106,7 @@ return [
     'prohibits'            => 'الحقل :attribute يحظر تواجد الحقل :other.',
     'regex'                => 'صيغة حقل :attribute .غير صحيحة.',
     'relatable'            => 'حقل :attribute قد لا يكون مرتبطا بالمصدر المحدد.',
-    'required'             => 'حقل :attribute مطلوب.',
+    'required'             => 'حقل :attribute مطلوب',
     'required_if'          => 'حقل :attribute مطلوب في حال ما إذا كان :other يساوي :value.',
     'required_unless'      => 'حقل :attribute مطلوب في حال ما لم يكن :other يساوي :values.',
     'required_with'        => 'حقل :attribute مطلوب إذا توفّر :values.',
@@ -130,6 +130,19 @@ return [
     'custom'               => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+            'name ar' => 'الأسم بالعربي',
+            'address'               => 'العنوان',
         ],
+    ],
+    'attributes' => [
+        'domain'              => 'subdomain',
+        'address'             => 'العنوان',
+        'name_ar'             => 'الإسم بالعربي',
+        'name_en'             => 'الإسم إنجليش',
+        'extra_work'             => 'طريقة إحتساب العمل الإضافي',
+        'month_calculator'             => 'إحتساب الراتب اليومي',
+        'nationalities'             => 'الجنسيات',
+        'job_number'             => 'الرقم الوظيفي',
+        'contract_start_date'             => 'تاريخ بداية العقد',
     ],
 ];

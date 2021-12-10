@@ -28,6 +28,8 @@
 
         <div class="container-fluid">
 
+            <form action="/setting" class="ajax_setting" method="post">
+                @csrf
             <div class="page-content-wrapper">
 
             
@@ -42,14 +44,14 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label red">{{ __('name company (EN)') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="name_en" type="text" placeholder="{{ __('name company (EN)') }}" id="example-text-input">
+                                        <input class="form-control" name="name_en" value="{{ $company->name_en }}" type="text" placeholder="{{ __('name company (EN)') }}" id="example-text-input">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="example-text-input2" class="col-sm-2 col-form-label red">{{ __('name company (AR)') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="name_ar" type="text" placeholder="{{ __('name company (AR)') }}" id="example-text-input2">
+                                        <input class="form-control" name="name_ar" value="{{ $company->name_ar }}" type="text" placeholder="{{ __('name company (AR)') }}" id="example-text-input2">
                                     </div>
                                 </div>
 
@@ -57,14 +59,14 @@
                                 <div class="row mb-3">
                                     <label for="example-email-input" class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="email" type="email" placeholder="{{ __('Email') }}" id="example-email-input">
+                                        <input class="form-control" name="email" value="{{ $company->email }}" type="email" placeholder="{{ __('Email') }}" id="example-email-input">
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                     <label for="example-tel-input" class="col-sm-2 col-form-label">{{ __('Telephone') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="phone" type="tel" placeholder="{{ __('Telephone') }}" id="example-tel-input">
+                                        <input class="form-control" name="phone" value="{{ $company->phone }}" type="tel" placeholder="{{ __('Telephone') }}" id="example-tel-input">
                                     </div>
                                 </div>
                                 
@@ -81,7 +83,7 @@
                             <div class="card-body">
                                 <h4 class="header-title">{{ __('Overtime Settings') }}</h4>
                                 <p class="card-title-desc red">{{ __('Choose a method for calculating overtime') }}</p>
-                                <div class="row choosse-input">
+                                <div class="row choosse-input" data-select="{{ $company->extra_work }}">
                                     
                                     <label class="choosse">
                                         <i class="fas fa-check-circle"></i>
@@ -101,7 +103,6 @@
                                         <input type="radio" class="hide" name="extra_work" value="total">
                                     </label>
 
-
                                 </div>
                             </div>
                         </div>
@@ -112,8 +113,7 @@
                                 <h4 class="header-title">{{ __('Payroll settings') }}</h4>
                                 <p class="card-title-desc red">{{ __('How to calculate daily salary') }}</p>
 
-                                <div class="row choosse-input">
-                                    
+                                <div class="row choosse-input" data-select="{{ $company->month_calculator }}">
                                     <label class="choosse">
                                         <i class="fas fa-check-circle"></i>
                                         <span>{{ __('Calculate all months as 30 days') }}</span>
@@ -125,9 +125,6 @@
                                         <span>{{ __('Calculating the month with its actual days') }}</span>
                                         <input type="radio" class="hide" name="month_calculator" value="different_days">
                                     </label>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -141,22 +138,10 @@
                             <div class="card-body">
 
                                 <h4 class="header-title">{{ __('nationalities') }}</h4>
-                                <p class="card-title-desc">{{ __('Choose the nationalities you want to activate in the system') }}</p>
+                                <p class="card-title-desc red">{{ __('Choose the nationalities you want to activate in the system') }}</p>
                                 
-                                <div class="row checkbox2">
-                                    
-                                    @php
-                                        $arra = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-                                    @endphp
-                                    @foreach ($arra as $item)
-                                    <label class="choosse checkbox2_item">
-                                        <i class="fas fa-check-circle"></i>
-                                        <span>{{ __('Egypt') }}</span>
-                                        <input type="checkbox" class="hide" name="extra_work" value="Egypt">
-                                    </label>
-                                    @endforeach
-
-                                    
+                                <div class="row checkbox2" data-select='{{ $company->nationalitys }}'>
+                                    @include('componentes.nationalitys', ['type' => 1])
                                 </div>
 
                             </div>
@@ -165,46 +150,50 @@
                 </div>
 
 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <button type="submit" class="btn btn-success waves-effect waves-light">Success</button>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+
+
             </div>
 
             
+        </form>
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
 
-  
     
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <script>document.write(new Date().getFullYear())</script> © Oprnize.
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+    @include('layouts.footer')
 </div>
 @endsection
 
 @section('script')
     <script>
-        $(".choosse-input").on('click','.choosse',function(){
-            $(this).closest(".choosse-input").find(".choosse").removeClass("clickable");
-            $(this).closest(".choosse-input").find(".choosse").find("i").hide(0);
+        
 
-            $(this).find("i").fadeIn();
-            $(this).addClass("clickable");
+        $(document).ready(function(e) {
+            $(".ajax_setting").ajaxForm({
+                complete: function(data){
+                    var mess = '';
+                    if(data.status == 422){
+                        for(let x in data.responseJSON.errors){
+                            mess += "<p>"+data.responseJSON.errors[x][0]+"</p>";
+                        }
+                        $(".massage_errors").hide(0).html(mess).fadeIn();
+                        $(".show_errors").trigger('click');
+                    }else if(data.status == 200){
+                        Success("{{__('Saved Ok')}}");
+                    }
+                    
+                }
+            });
         });
-
-        $("body").on('click','.checkbox2_item',function(){
-            console.log('asdasds');
-            if ($(this).hasClass("clickable")) {
-                $(this).removeClass("clickable");
-            }else{
-                $(this).addClass("clickable");
-            }
-            
-        });
-
     </script>
+
 @endsection

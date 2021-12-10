@@ -39,7 +39,11 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::get('/', function ($account) {
             return "s >".$account;
         });
+
         Route::get('/setting', 'SettingController@edit');
+        Route::post('/setting', 'SettingController@update');
+        Route::resource('nationality', 'NationalityController');
+        Route::resource('/employee', 'EmployeeController');
 
     }); 
 

@@ -19,6 +19,8 @@ class CreateCompaniesTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name_en')->nullable();
             $table->string('name_ar')->nullable();
+            $table->string('email')->nullable();;
+            $table->string('phone')->nullable();;
             $table->set('extra_work', ['saudi', 'basic', 'total'])->nullable();
             $table->set('month_calculator', ['30days', 'different_days'])->nullable();
             $table->timestamps();

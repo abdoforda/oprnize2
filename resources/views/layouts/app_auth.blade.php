@@ -19,19 +19,22 @@ dir="ltr"
 
     @if (app()->getLocale() == "ar")
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap-rtl.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap-rtl.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app-rtl.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app-rtl.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     @else
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     @endif
 
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Sweet Alert-->
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
     @yield('style')
     @if (app()->getLocale() == "ar")
@@ -39,13 +42,16 @@ dir="ltr"
         .dir01 {
             direction: rtl;
         }
+
+        .checkbox2_item i {
+            left: inherit;
+            right: -4px;
+        }
     </style>
     @endif
 </head>
 
 <body>
-
-
 
 
     <!-- Begin page -->
@@ -59,19 +65,19 @@ dir="ltr"
                     <div class="navbar-brand-box">
                         <a href="index.html" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
+                                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                             </span>
                             <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="" height="20">
+                                <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="20">
                             </span>
                         </a>
 
                         <a href="index.html" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
+                                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                             </span>
                             <span class="logo-lg">
-                                <img src="assets/images/logo-light.png" alt="" height="20">
+                                <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="20">
                             </span>
                         </a>
                     </div>
@@ -103,13 +109,13 @@ dir="ltr"
                         @if (Session::has('locale') && Session::get('locale') == "ar")
                         <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            <img class="me-2" src="assets/images/flags/ar.jpg" alt="Header Language" height="16">
+                            <img class="me-2" src="{{ asset('assets/images/flags/ar.jpg') }}" alt="Header Language" height="16">
                             العربية <span class="mdi mdi-chevron-down"></span>
                         </button>
                         @else
                         <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            <img class="me-2" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
+                            <img class="me-2" src="{{ asset('assets/images/flags/us.jpg') }}" alt="Header Language" height="16">
                             English <span class="mdi mdi-chevron-down"></span>
                         </button>
                         @endif
@@ -118,12 +124,12 @@ dir="ltr"
 
                             @if (Session::has('locale') && Session::get('locale') == "ar")
                             <a href="/language/en" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="{{ asset('assets/images/flags/us.jpg') }}" alt="user-image" class="me-1" height="12">
                                 <span class="align-middle"> English </span>
                             </a>
                             @else
                             <a href="/language/ar" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/ar.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="{{ asset('assets/images/flags/ar.jpg') }}" alt="user-image" class="me-1" height="12">
                                 <span class="align-middle"> العربية </span>
                             </a>
                             @endif
@@ -145,7 +151,7 @@ dir="ltr"
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-7.jpg"
+                            <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-7.jpg') }}"
                                 alt="Header Avatar">
                             <span class="d-none d-xl-inline-block ms-1">James</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -182,7 +188,7 @@ dir="ltr"
                 <div class="user-sidebar text-center">
                     <div class="dropdown">
                         <div class="user-img">
-                            <img src="assets/images/users/avatar-7.jpg" alt="" class="rounded-circle">
+                            <img src="{{ asset('assets/images/users/avatar-7.jpg') }}" alt="" class="rounded-circle">
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
@@ -209,9 +215,9 @@ dir="ltr"
                         </li>
 
                         <li>
-                            <a href="calendar.html" class=" waves-effect">
-                                <i class="dripicons-calendar"></i>
-                                <span>Calendar</span>
+                            <a href="/employee" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Employees')}}</span>
                             </a>
                         </li>
 
@@ -459,24 +465,126 @@ dir="ltr"
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-    <!-- end Account pages -->
+    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light show_errors" data-bs-toggle="modal"
+        data-bs-target=".bs-example-modal-center" style="display: none">Modal demo</button>
+    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0">{{__('Notes')}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
+                    </button>
+                </div>
+                <div class="modal-body massage_errors">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    @yield('models')
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="//rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js"></script>
 
     <!-- Plugins js-->
-    <script src="assets/libs/jquery-countdown/jquery.countdown.min.js"></script>
-
+    <script src="{{ asset('assets/libs/jquery-countdown/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    
     <!-- Countdown js -->
-    <script src="assets/js/pages/coming-soon.init.js"></script>
+    <script src="{{ asset('assets/js/pages/coming-soon.init.js') }}"></script>
 
-    <script src="assets/js/app.js"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    
+    <script>
+        function Success(message){
+
+            
+
+            Swal.fire({
+                position: "center-center",
+                icon: "success",
+                title: "{{__('Success')}}",
+                text: message,
+                showConfirmButton: !1,
+                timer: 2000
+            })
+
+        }
+    </script>
+    <!-- end Account pages -->
     <script src="{{ asset('assets/js/ajax.form.js') }}"></script>
+    <script>
+
+$(".choosse-input").on('click','.choosse',function(){
+    $(this).closest(".choosse-input").find(".choosse").removeClass("clickable");
+    $(this).closest(".choosse-input").find(".choosse").find("i").hide(0);
+
+    $(this).find("i").fadeIn();
+    $(this).addClass("clickable");
+});
+
+        $(document).ready(function(e) {
+
+
+        $(".choosse-input").each(function(index) {
+            var th = $(this).data("select");
+            if (th != '') {
+                $(this).find("input[value='" + th + "']").prop("checked", true);
+                $(this).find("input[value='" + th + "']").closest(".choosse").addClass("clickable");
+                $(this).find("input[value='" + th + "']").closest(".choosse").find("i").fadeIn();
+            }
+        });
+
+
+
+    $(".checkbox2").each(function(index) {
+        var th = $(this).data("select");
+        var ele = $(this);
+        if (th != '[]') {
+            $.each(th, function(index, value) {
+                console.log(value.id);
+                ele.find("input[value='" + value.id + "']").prop("checked", true);
+                var id = ele.find("input[value='" + value.id + "']").attr('id');
+                ele.find("label[for='" + id + "']").addClass("clickable").find("i").fadeIn();
+            });
+        }
+    });
+
+
+    
+
+    
+
+
+});
+
+
+$(".euhgiuerhgerg").keyup(function(e) {
+    var v = $(this).val();
+    console.log(v);
+	if(v != ''){
+		if(v.charAt(0) == 1){
+			$(".country02").find("input[value='1']").prop("checked", true);
+			$(".country02").find("input[value='1']").closest(".choosse").addClass("clickable");
+			$(".country02").find("input[value='1']").closest(".choosse").find("i").fadeIn();
+            return;
+        }
+        $(".country02").find("input[value='1']").closest(".choosse").hide(0);
+        $(".country02").find("input[value='1']").prop("checked", false);
+        $(".country02").find("input[value='1']").closest(".choosse").removeClass("clickable");
+        $(".country02").find("input[value='1']").closest(".choosse").find("i").hide(0);
+	}
+});
+    </script>
     @yield('script')
+    @yield('script2')
 </body>
 
 </html>
