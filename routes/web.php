@@ -40,9 +40,14 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
             return "s >".$account;
         });
 
+        Route::get('/delete_tr', 'SettingController@delete_tr');
         Route::get('/setting', 'SettingController@edit');
         Route::post('/setting', 'SettingController@update');
         Route::resource('nationality', 'NationalityController');
+        Route::resource('department', 'DepartmentController');
+        
+        
+        
         Route::resource('/employee', 'EmployeeController');
 
     }); 

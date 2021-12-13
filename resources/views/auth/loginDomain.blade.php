@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<br />
+
+
+
 <div class="home-center">
     <div class="home-desc-center">
 

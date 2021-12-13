@@ -27,10 +27,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $company = auth()->user()->company;
-        $nationalities = Nationality::where('company_id', auth()->user()->company->id)
-        ->orwhere('company_id', NULL)
-        ->get();
-
+        $nationalities = $company->nationalitys;
         return view('employee.create',compact('company','nationalities'));
     }
 
@@ -93,9 +90,13 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Request $request)
     {
-        //
+        $em = Employee::findOrFail($request->employee);
+        $nationalities = Nationality::where('company_id', auth()->user()->company->id)
+        ->orwhere('company_id', NULL)
+        ->get();
+        return view('employee.create',compact('em','nationalities'));
     }
 
     /**

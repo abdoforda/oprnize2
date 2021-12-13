@@ -21,6 +21,8 @@ class CreateNationalitiesTable extends Migration
 
             $table->foreignId('company_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
+            
         });
 
         $data = [

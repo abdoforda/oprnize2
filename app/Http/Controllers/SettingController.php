@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Nationality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class SettingController extends Controller
 {
@@ -16,9 +19,6 @@ class SettingController extends Controller
         $nationalities = Nationality::where('company_id', auth()->user()->company->id)
         ->orwhere('company_id', NULL)
         ->get();
-
-        
-
 
         return view("setting.edit", compact('nationalities','company'));
     }
@@ -42,8 +42,33 @@ class SettingController extends Controller
         $com->month_calculator = $request->month_calculator;
         $com->save();
 
-        $com->nationalitys()->sync($request->nationalities);
+        //return count($com->nationalitys);
+        if(count($com->nationalitys) == 0){
+            $com->nationalitys()->attach($request->nationalities);
+        }else{
+            $com->nationalitys()->sync($request->nationalities);
+        }
+
+        
 
         return "success";
+    }
+
+    public function delete_tr(Request $request){
+        
+        $request->validate([
+            'table'=> Rule::in(['nationalities','departments']),
+        ]);
+
+        if($request->table == "departments"){
+            $del = Department::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "nationalities"){
+            $del = Nationality::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+        
+        $del->delete();
+        return "Delete ok";
     }
 }

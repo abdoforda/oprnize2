@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Nationality;
+use App\Department;
 use Illuminate\Http\Request;
 
-class NationalityController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,11 @@ class NationalityController extends Controller
      */
     public function index()
     {
-        $nationalities = Nationality::where('company_id', auth()->user()->company->id)
+        $nationalities = Department::where('company_id', auth()->user()->company->id)
         ->orderBy('id','DESC')
         ->get();
 
-        return view('nationality.index',compact('nationalities'));
+        return view('department.index',compact('nationalities'));
     }
 
     /**
@@ -39,14 +39,13 @@ class NationalityController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name_ar'=> ['required'],
             'name_en'=> ['required'],
         ]);
 
         $company_id = auth()->user()->company->id;
-        $nationality = new Nationality();
+        $nationality = new Department();
         $nationality->name_ar = $request->name_ar;
         $nationality->name_en = $request->name_en;
         $nationality->company_id = $company_id;
@@ -57,10 +56,10 @@ class NationalityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Nationality  $nationality
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Nationality $nationality)
+    public function show(Department $department)
     {
         //
     }
@@ -68,10 +67,10 @@ class NationalityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Nationality  $nationality
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nationality $nationality)
+    public function edit(Department $department)
     {
         //
     }
@@ -80,7 +79,7 @@ class NationalityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Nationality  $nationality
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -91,7 +90,7 @@ class NationalityController extends Controller
             'name_en'=> ['required'],
         ]);
 
-        $na = Nationality::findOrFail($request->nationality);
+        $na = Department::findOrFail($request->department);
         if($na->company_id != auth()->user()->company->id){
             return;
         }
@@ -104,10 +103,10 @@ class NationalityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Nationality  $nationality
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nationality $nationality)
+    public function destroy(Department $department)
     {
         //
     }

@@ -71,7 +71,7 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Employee Name (AR)')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="name_ar" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" name="name_ar" @isset($em) value="{{ $em->name_ar }}" @endisset required="">
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -80,7 +80,7 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom02" class="form-label">{{__('Employee Name (EN)')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom02" name="name_en" required="">
+                                                            <input type="text" class="form-control" id="validationCustom02" name="name_en" @isset($em) value="{{ $em->name_en }}" @endisset required="">
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -92,7 +92,7 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Type')}}</label>
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->gender }}" @endisset >
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Male') }}</span>
@@ -110,7 +110,7 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Social status')}}</label>
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->marital_status }}" @endisset>
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Married') }}</span>
@@ -132,7 +132,7 @@
                                                         <label for="validationCustom01" class="form-label">{{__('Nationality')}}</label>
                                                         <div class="row checkbox2" style="display: flex;">
                                                         </div>
-                                                        <div class="row choosse-input country02" data-select="">
+                                                        <div class="row choosse-input country02" @isset($em) data-select="{{ $em->nationality_id }}" @endisset>
                                                             @include('componentes.nationalitys', ['type'=>2])
                                                         </div>
                                                     </div>
@@ -145,7 +145,7 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Identification Number')}}</label>
-                                                            <input type="text" class="form-control euhgiuerhgerg" id="validationCustom01" name="id_num" required="">
+                                                            <input type="text" class="form-control euhgiuerhgerg" id="validationCustom01" @isset($em) value="{{ $em->id_num }}" @endisset name="id_num" required="">
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -155,7 +155,7 @@
                                                         <div class="mb-3">
                                                             <label for="validationCustom02" class="form-label">{{__('Release date')}}</label>
                                                             <div class="input-group" id="datepicker2">
-                                                                <input type="text" class="form-control" name="id_issue_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" name="id_issue_date" @isset($em) value="{{ $em->id_issue_date }}" @endisset placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker2' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -167,7 +167,7 @@
                                                         <div class="mb-3">
                                                             <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
                                                             <div class="input-group" id="datepicker3">
-                                                                <input type="text" class="form-control" name="id_expire_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->id_expire_date }}" @endisset name="id_expire_date" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker3' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -184,7 +184,7 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Passport number')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="passport_num" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->passport_num }}" @endisset name="passport_num" required="">
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
@@ -194,7 +194,7 @@
                                                         <div class="mb-3">
                                                             <label for="validationCustom02" class="form-label">{{__('Release date')}}</label>
                                                             <div class="input-group" id="datepicker4">
-                                                                <input type="text" class="form-control" name="passport_issue_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" name="passport_issue_date" @isset($em) value="{{ $em->passport_issue_date }}" @endisset placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker4' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -206,7 +206,7 @@
                                                         <div class="mb-3">
                                                             <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
                                                             <div class="input-group" id="datepicker5">
-                                                                <input type="text" class="form-control" name="passport_expire_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" name="passport_expire_date" @isset($em) value="{{ $em->passport_expire_date }}" @endisset placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker5' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -252,7 +252,7 @@
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Job Number')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="job_number" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" name="job_number" @isset($em) value="{{ $em->job_number }}" @endisset required="">
                                                         </div>
                                                     </div>
 
@@ -301,14 +301,11 @@
                                                 <br />
                                                 <div class="row">
                                                     <h4 class="header-title">{{__('Contract data')}}</h4>
-                                                    
-                                                    
-                                                    
-
+                                                   
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('Type of Contract')}}</label>
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->contract_type }}" @endisset >
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('limited time') }}</span>
@@ -326,7 +323,7 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('Employment type')}}</label>
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input"  @isset($em) data-select="{{ $em->employment_type }}" @endisset >
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Full time') }}</span>
@@ -356,7 +353,7 @@
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Contract Start Date')}}</label>
                                                             <div class="input-group" id="datepicker8">
-                                                                <input type="text" class="form-control" name="contract_start_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_start_date }}" @endisset name="contract_start_date" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker8' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -369,7 +366,7 @@
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Contract End Date')}}</label>
                                                             <div class="input-group" id="datepicker9">
-                                                                <input type="text" class="form-control" name="contract_end_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_end_date }}" @endisset name="contract_end_date" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker9' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -388,7 +385,7 @@
                                                     <h4 class="header-title">{{__('Annual balance')}}</h4>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->id_num }}" @endisset >
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>21</span>
@@ -411,14 +408,14 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Salary Data')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="salary" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->salary }}" @endisset name="salary" required="">
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <button type="submit" class="btn btn-success waves-effect waves-light">Success</button>
+                                                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('Save') }}</button>
                                                     </div>
                                                 </div>
 

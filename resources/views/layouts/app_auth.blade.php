@@ -221,27 +221,16 @@ dir="ltr"
                             </a>
                         </li>
 
-                        <li>
-                            <a href="chat.html" class=" waves-effect">
-                                <i class="dripicons-message"></i>
-                                <span>Chat</span>
-                            </a>
-                        </li>
 
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-cart"></i>
-                                <span>Ecommerce</span>
+                                <i class="dripicons-toggles"></i>
+                                <span>{{ __('Company Settings') }}</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="ecommerce-products.html">Products</a></li>
-                                <li><a href="ecommerce-product-detail.html">Product Detail</a></li>
-                                <li><a href="ecommerce-orders.html">Orders</a></li>
-                                <li><a href="ecommerce-customers.html">Customers</a></li>
-                                <li><a href="ecommerce-cart.html">Cart</a></li>
-                                <li><a href="ecommerce-checkout.html">Checkout</a></li>
-                                <li><a href="ecommerce-shops.html">Shops</a></li>
-                                <li><a href="ecommerce-add-product.html">Add Product</a></li>
+                                <li><a href="/nationality">{{ __('nationalities') }}</a></li>
+                                <li><a href="/department">{{ __('Departments') }}</a></li>
+                                <li><a href="/setting">{{ __('General Settings') }}</a></li>
                             </ul>
                         </li>
 
@@ -483,7 +472,7 @@ dir="ltr"
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    @yield('models')
+    
     <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -501,90 +490,13 @@ dir="ltr"
     <script src="{{ asset('assets/js/pages/coming-soon.init.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    
-    <script>
-        function Success(message){
-
-            
-
-            Swal.fire({
-                position: "center-center",
-                icon: "success",
-                title: "{{__('Success')}}",
-                text: message,
-                showConfirmButton: !1,
-                timer: 2000
-            })
-
-        }
-    </script>
-    <!-- end Account pages -->
     <script src="{{ asset('assets/js/ajax.form.js') }}"></script>
-    <script>
-
-$(".choosse-input").on('click','.choosse',function(){
-    $(this).closest(".choosse-input").find(".choosse").removeClass("clickable");
-    $(this).closest(".choosse-input").find(".choosse").find("i").hide(0);
-
-    $(this).find("i").fadeIn();
-    $(this).addClass("clickable");
-});
-
-        $(document).ready(function(e) {
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
-        $(".choosse-input").each(function(index) {
-            var th = $(this).data("select");
-            if (th != '') {
-                $(this).find("input[value='" + th + "']").prop("checked", true);
-                $(this).find("input[value='" + th + "']").closest(".choosse").addClass("clickable");
-                $(this).find("input[value='" + th + "']").closest(".choosse").find("i").fadeIn();
-            }
-        });
-
-
-
-    $(".checkbox2").each(function(index) {
-        var th = $(this).data("select");
-        var ele = $(this);
-        if (th != '[]') {
-            $.each(th, function(index, value) {
-                console.log(value.id);
-                ele.find("input[value='" + value.id + "']").prop("checked", true);
-                var id = ele.find("input[value='" + value.id + "']").attr('id');
-                ele.find("label[for='" + id + "']").addClass("clickable").find("i").fadeIn();
-            });
-        }
-    });
-
-
-    
-
-    
-
-
-});
-
-
-$(".euhgiuerhgerg").keyup(function(e) {
-    var v = $(this).val();
-    console.log(v);
-	if(v != ''){
-		if(v.charAt(0) == 1){
-			$(".country02").find("input[value='1']").prop("checked", true);
-			$(".country02").find("input[value='1']").closest(".choosse").addClass("clickable");
-			$(".country02").find("input[value='1']").closest(".choosse").find("i").fadeIn();
-            return;
-        }
-        $(".country02").find("input[value='1']").closest(".choosse").hide(0);
-        $(".country02").find("input[value='1']").prop("checked", false);
-        $(".country02").find("input[value='1']").closest(".choosse").removeClass("clickable");
-        $(".country02").find("input[value='1']").closest(".choosse").find("i").hide(0);
-	}
-});
-    </script>
     @yield('script')
     @yield('script2')
+    @yield('models')
 </body>
 
 </html>

@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->set('extra_work', ['saudi', 'basic', 'total'])->nullable();
             $table->set('month_calculator', ['30days', 'different_days'])->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
