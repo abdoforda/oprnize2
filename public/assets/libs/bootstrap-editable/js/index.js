@@ -339,7 +339,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
                     return $.ajax($.extend({
                         url     : this.options.url,
                         data    : params,
-                        type    : 'POST'
+                        type    : 'GET'
                     }, this.options.ajaxOptions));
                 }
             }
@@ -2073,7 +2073,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
                         ajaxOptions = {
                             url: editable.options.url,
                             data: params,
-                            type: 'POST'  
+                            type: 'GET'  
                         };
                         
                         // use success / error from options 
@@ -2087,7 +2087,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
                         ajaxOptions = {
                             url: config.url,
                             data: values, 
-                            type: 'POST'
+                            type: 'GET'
                         };                        
                     }                    
 
@@ -4679,10 +4679,10 @@ Editableform based on Twitter Bootstrap 3
     //buttons
     $.fn.editableform.buttons = 
       '<button type="submit" class="btn btn-primary btn-sm editable-submit">'+
-        '<i class="glyphicon glyphicon-ok"></i>'+
+        '<i class="far fa-save"></i>'+
       '</button>'+
       '<button type="button" class="btn btn-default btn-sm editable-cancel">'+
-        '<i class="glyphicon glyphicon-remove"></i>'+
+        ''+
       '</button>';         
     
     //error classes
@@ -4704,7 +4704,6 @@ Editableform based on Twitter Bootstrap 3
         containerName: 'popover',
         containerDataName: 'bs.popover',
         innerCss: '.popover-content',
-        defaults: $.fn.popover.Constructor.DEFAULTS,
 
         initContainer: function(){
             $.extend(this.containerOptions, {

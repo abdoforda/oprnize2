@@ -6,7 +6,7 @@ use App\Scopes\CompanyScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Department extends Model
+class Job extends Model
 {
     use SoftDeletes;
     
@@ -14,13 +14,12 @@ class Department extends Model
         return $this->{'name_'.app()->getLocale()};
     }
     
-    public function sections(){
-        return $this->hasMany(Section::class);
+    public function section(){
+        return $this->belongsTo(Section::class);
     }
 
     protected static function booted()
     {
         static::addGlobalScope(new CompanyScope());
     }
-    
 }

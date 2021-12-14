@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Job;
 use App\Nationality;
+use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -56,8 +58,9 @@ class SettingController extends Controller
 
     public function delete_tr(Request $request){
         
+
         $request->validate([
-            'table'=> Rule::in(['nationalities','departments']),
+            'table'=> Rule::in(['nationalities','departments','sections','jobs']),
         ]);
 
         if($request->table == "departments"){
@@ -66,6 +69,14 @@ class SettingController extends Controller
 
         if($request->table == "nationalities"){
             $del = Nationality::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "sections"){
+            $del = Section::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "jobs"){
+            $del = Job::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
         }
         
         $del->delete();

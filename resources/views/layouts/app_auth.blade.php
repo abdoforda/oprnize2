@@ -229,7 +229,12 @@ dir="ltr"
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/nationality">{{ __('nationalities') }}</a></li>
-                                <li><a href="/department">{{ __('Departments') }}</a></li>
+                                <li><a href="/department">{{ __('Departments') }}
+                                
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a></li>
+                                <li><a href="/section">{{ __('Sections') }}</a></li>
+                                <li><a href="/job">{{ __('Jobs') }}</a></li>
                                 <li><a href="/setting">{{ __('General Settings') }}</a></li>
                             </ul>
                         </li>
@@ -444,6 +449,7 @@ dir="ltr"
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
+        
         @yield('content')
         <!-- end main content-->
 
@@ -489,14 +495,21 @@ dir="ltr"
     <!-- Countdown js -->
     <script src="{{ asset('assets/js/pages/coming-soon.init.js') }}"></script>
 
+    @yield('script')
+
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/ajax.form.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
-    @yield('script')
+    
     @yield('script2')
     @yield('models')
+    @if(session()->has('warning'))
+    <script>
+        toast_message("{{ __('Notes') }}","{!! session()->get('warning') !!}","{{ __('OK01') }}");
+    </script>
+    @endif
 </body>
 
 </html>

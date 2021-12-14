@@ -153,12 +153,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Success</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('Save') }}</button>
                         </div>
                     </div> <!-- end col -->
                 </div>
-
-
             </div>
 
             

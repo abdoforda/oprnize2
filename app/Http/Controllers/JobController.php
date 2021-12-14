@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
+use App\Job;
 use App\Section;
 use Illuminate\Http\Request;
 
-class SectionController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,22 +21,24 @@ class SectionController extends Controller
 
     public function index()
     {
-        $nationalities = Section::where('company_id', auth()->user()->company->id)
+        
+        $nationalities = Job::where('company_id', auth()->user()->company->id)
         ->orderBy('id','DESC')
         ->get();
 
-        $departments = Department::where('company_id', auth()->user()->company->id)
+        $sections = Section::where('company_id', auth()->user()->company->id)
         ->orderBy('id','DESC')
         ->get();
 
-        $departments2 = $departments->map(function($name){
+        $sections2 = $sections->map(function($name){
             return [
                 'value' => $name->id,
                 'text' => $name->name,
             ];
         });
 
-        return view('section.index',compact('nationalities','departments','departments2'));
+        return view('job.index',compact('nationalities','sections','sections2'));
+    
     }
 
     /**
@@ -58,29 +60,29 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'department_id'=> ['required'],
+            'section_id'=> ['required'],
             'name_ar'=> ['required'],
             'name_en'=> ['required'],
         ]);
 
         $company_id = auth()->user()->company->id;
-        $nationality = new Section();
+        $nationality = new Job();
         $nationality->name_ar = $request->name_ar;
         $nationality->name_en = $request->name_en;
-        $nationality->department_id = $request->department_id;
+        $nationality->section_id = $request->section_id;
         $nationality->company_id = $company_id;
         $nationality->save();
-        $nationality->load('department');
+        $nationality->load('section');
         return $nationality;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show(Job $job)
     {
         //
     }
@@ -88,10 +90,10 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+    public function edit(Job $job)
     {
         //
     }
@@ -100,7 +102,7 @@ class SectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
+     * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -110,7 +112,7 @@ class SectionController extends Controller
             'name_en'=> ['required'],
         ]);
 
-        $na = Section::findOrFail($request->section);
+        $na = Job::findOrFail($request->job);
         if($na->company_id != auth()->user()->company->id){
             return;
         }
@@ -120,13 +122,13 @@ class SectionController extends Controller
         return $na;
     }
 
-    public function update_department(Request $request)
+    public function update_section(Request $request)
     {
-        $de = Department::findOrFail($request->value);
+        $de = Section::findOrFail($request->value);
         if($de){
-            $se = Section::findOrFail($request->pk);
+            $se = Job::findOrFail($request->pk);
             if($se){
-                $se->department_id = $request->value;
+                $se->section_id = $request->value;
                 $se->save();
             }
         }
@@ -136,10 +138,10 @@ class SectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy(Job $job)
     {
         //
     }

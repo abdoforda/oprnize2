@@ -144,5 +144,7 @@ return [
         'nationalities'             => 'الجنسيات',
         'job_number'             => 'الرقم الوظيفي',
         'contract_start_date'             => 'تاريخ بداية العقد',
+        'department_id'             => 'الإدارة',
+        'section_id'             => 'القسم',
     ],
 ];

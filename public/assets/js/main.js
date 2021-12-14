@@ -8,7 +8,16 @@ function Success(message) {
     });
 }
 
+function toast_message(notes, message,confirm){
 
+    Swal.fire({
+        title: notes,
+        text: message,
+        icon: "warning",
+        confirmButtonColor: "#1cbb8c",
+        confirmButtonText: confirm
+    })
+}
 
 $(".choosse-input").on("click", ".choosse", function () {
     $(this).closest(".choosse-input").find(".choosse").removeClass("clickable");
