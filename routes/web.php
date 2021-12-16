@@ -45,13 +45,23 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::post('/setting', 'SettingController@update');
         Route::resource('nationality', 'NationalityController');
         Route::resource('department', 'DepartmentController');
+        
+        //sections
         Route::resource('section', 'SectionController');
         Route::get('update_department', 'SectionController@update_department');
+        
+        //jobs
         Route::resource('job', 'JobController');
         Route::get('update_section', 'JobController@update_section');
         
+        //vacations
+        Route::resource('vacation', 'VacationController');
+        Route::get('update_type_vacation', 'VacationController@update_type_vacation');
         
+        //allowance
+        Route::resource('allowance', 'AllowanceController');
         
+
         Route::resource('/employee', 'EmployeeController');
 
     }); 

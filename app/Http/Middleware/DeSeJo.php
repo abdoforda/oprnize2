@@ -31,7 +31,7 @@ class DeSeJo
                 return redirect('/department')->with('warning', __('You must add departments first, and you will be redirected to the Add Departments page'));
             }
             if(count($se) == 0){
-                return redirect('/department')->with('warning', __('Sections must be added first and then add job titles, you are now on the Sections page, add them now'));
+                return redirect('/section')->with('warning', __('Sections must be added first and then add job titles, you are now on the Sections page, add them now'));
             }
         }
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Allowance;
 use App\Department;
 use App\Job;
 use App\Nationality;
 use App\Section;
+use App\Vacation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -60,7 +62,7 @@ class SettingController extends Controller
         
 
         $request->validate([
-            'table'=> Rule::in(['nationalities','departments','sections','jobs']),
+            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances']),
         ]);
 
         if($request->table == "departments"){
@@ -77,6 +79,14 @@ class SettingController extends Controller
 
         if($request->table == "jobs"){
             $del = Job::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "vacations"){
+            $del = Vacation::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "allowances"){
+            $del = Allowance::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
         }
         
         $del->delete();

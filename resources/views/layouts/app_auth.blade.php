@@ -240,6 +240,21 @@ dir="ltr"
                         </li>
 
                         <li>
+                            <a href="/vacation" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Leave Types')}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/allowance" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Allowances')}}</span>
+                            </a>
+                        </li>
+
+
+                        <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-mail"></i>
                                 <span>Email</span>

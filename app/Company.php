@@ -23,4 +23,13 @@ class Company extends Model
         return $this->belongsToMany(Nationality::class);
     }
 
+    public function vacations(){
+        return $this->hasMany(Vacation::class);
+    }
+
+    public function allowances(){
+        return $this->hasMany(Allowance::class);
+    }
+
+
 }
