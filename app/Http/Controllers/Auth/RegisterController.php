@@ -117,7 +117,7 @@ class RegisterController extends Controller
             ['company_id'=>$company->id, 'name_en'=> 'Annual','name_ar'=> 'سنوية','min'=> 10,'max'=> 21,'type'=> 'all'],
             ['company_id'=>$company->id, 'name_en'=> 'death','name_ar'=> 'وفاة','min'=> 1,'max'=> 5,'type'=> 'all'],
             ['company_id'=>$company->id, 'name_en'=> 'marriage','name_ar'=> 'زواج','min'=> 0,'max'=> 0,'type'=> 'all'],
-            ['company_id'=>$company->id, 'name_en'=> 'born','name_ar'=> 'مولود','min'=> 0,'max'=> 0,'type'=> 'all'],
+            ['company_id'=>$company->id, 'name_en'=> 'born','name_ar'=> 'مولود','min'=> 0,'max'=> 0,'type'=> 'male'],
             ['company_id'=>$company->id, 'name_en'=> 'Perform the Hajj','name_ar'=> 'أداء فريضة الحج','min'=> 0,'max'=> 0,'type'=> 'all'],
             ['company_id'=>$company->id, 'name_en'=> 'Take the exams','name_ar'=> 'أداء الامتحانات','min'=> 0,'max'=> 0,'type'=> 'all'],
             ['company_id'=>$company->id, 'name_en'=> 'Unpaid leave','name_ar'=> 'اجازة بدون أجر','min'=> 10,'max'=> 20,'type'=> 'all'],

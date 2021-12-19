@@ -31,6 +31,13 @@ class EmployeeController extends Controller
         return view('employee.create',compact('company','nationalities'));
     }
 
+    public function search_employee(Request $request)
+    {
+
+        $em = Employee::search_from_job_number($request->job_number);
+        return $em;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

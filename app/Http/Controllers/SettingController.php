@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Allowance;
+use App\Deduction;
 use App\Department;
 use App\Job;
 use App\Nationality;
@@ -62,7 +63,7 @@ class SettingController extends Controller
         
 
         $request->validate([
-            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances']),
+            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances','deductions']),
         ]);
 
         if($request->table == "departments"){
@@ -87,6 +88,10 @@ class SettingController extends Controller
 
         if($request->table == "allowances"){
             $del = Allowance::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+        
+        if($request->table == "deductions"){
+            $del = Deduction::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
         }
         
         $del->delete();

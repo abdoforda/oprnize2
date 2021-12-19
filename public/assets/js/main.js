@@ -65,20 +65,20 @@ function delete_tr(thiss,table,idd){
     var id = thiss.data('id');
     
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: lang ? "هل أنت متأكد؟" : "Are you sure?",
+        text: lang ? "هل تريد الحذف فعلا" : "Do you really want to delete?",
         icon: "warning",
         showCancelButton: !0,
         confirmButtonColor: "#1cbb8c",
         cancelButtonColor: "#f14e4e",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: lang ? "نعم إحذف !" : "Yes, delete it!",
+        cancelButtonText: lang ? "إلغاء" : "Cancel",
     }).then(function(t) {
         if(t.value){
             $.get('/delete_tr',{id,table},function(e){
                 $("#"+idd).fadeOut(500);
             });
         }
-        
     })
 
 

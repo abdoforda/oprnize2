@@ -37,7 +37,7 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
     Route::middleware(['auth','CheckSettings'])->group(function () {
 
         Route::get('/', function ($account) {
-            return "s >".$account;
+            return redirect('/setting');
         });
 
         Route::get('/delete_tr', 'SettingController@delete_tr');
@@ -62,7 +62,16 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::resource('allowance', 'AllowanceController');
         
 
+        //employee
         Route::resource('/employee', 'EmployeeController');
+        Route::get('/search_employee', 'EmployeeController@search_employee');
+
+        //Payroll + deductions
+        Route::resource('/deduction', 'DeductionController');
+        //Route::resource('/payroll', 'PayrollController');
+        Route::get('/payroll', function(){
+            return redirect('/');
+        });
 
     }); 
 

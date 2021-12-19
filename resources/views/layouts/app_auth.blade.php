@@ -48,6 +48,9 @@ dir="ltr"
             right: -4px;
         }
     </style>
+    <script>
+        var lang = "ar";
+    </script>
     @endif
 </head>
 
@@ -250,6 +253,20 @@ dir="ltr"
                             <a href="/allowance" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Allowances')}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/deduction" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Deductions')}}</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/payroll" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Payroll manager')}}</span>
                             </a>
                         </li>
 

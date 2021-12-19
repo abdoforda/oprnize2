@@ -31,5 +31,13 @@ class Company extends Model
         return $this->hasMany(Allowance::class);
     }
 
+    public function payrolls(){
+        return $this->hasMany(Payroll::class);
+    }
+    
+    public function deductions(){
+        return $this->hasMany(Deduction::class);
+    }
+
 
 }
