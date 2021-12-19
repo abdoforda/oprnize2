@@ -127,7 +127,6 @@ class RegisterController extends Controller
         ]; Vacation::insert($data2);
 
         $data3 = [
-            ['company_id'=>$company->id, 'name_en'=> 'GOSI Subscription','name_ar'=> 'استقطاع التأمينات الاجتماعية', 'type'=> 'deduction', 'percentage'=>10],
             ['company_id'=>$company->id, 'name_en'=> 'HRA','name_ar'=> 'سكن', 'type'=> 'addition', 'percentage'=>25],
             ]; 
             Allowance::insert($data3);
