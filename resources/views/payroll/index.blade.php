@@ -50,7 +50,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{__('Date')}}</th>
-                                            <th>{{__('Options')}}</th>
+                                            <th style="width: 100px;">{{__('Options')}}</th>
                                         </tr>
                                     </thead>
 
@@ -58,13 +58,10 @@
                                     <tbody class="append2">
                                         @foreach ($nationalities as $index => $nationality)
                                         <tr id="updater{{$index}}">
-                                            <td class="ed_ar">{{ $nationality->name_ar }}</td>
-                                            <td class="ed_en">{{ $nationality->name_en }}</td>
-                                            <td >
-                                                <a class="inline-department" href="#" data-type="select" data-pk="{{ $nationality->id }}" data-value="{{ $nationality->department->id }}" data-url="/update_department" >{{ $nationality->department->name }}</a>
-                                                </td>
+                                            
+                                                <td class="ed_ar"><a href="/payroll/{{ $nationality->id }}">{{ $nationality->date }}</a></td>
+                                            
                                             <td>
-                                                <a onclick="update_nationality(this,'updater{{$index}}')" data-id="{{ $nationality->id }}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
                                                 <button onclick="delete_tr(this,'payrolls','updater{{$index}}',)" data-id="{{ $nationality->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>
@@ -108,17 +105,7 @@
 <script src="{{ asset('assets/libs/bootstrap-editable/js/index.js') }}"></script>
 <script>
 var idd = "";
-function update_nationality(thiss,id){
 
-    var thiss = $(thiss);
-    idd = id;
-    var show_name_ar = thiss.closest('tr').find('.ed_ar').text();
-    var show_name_en = thiss.closest('tr').find('.ed_en').text();
-    $("#edit_name_ar").val(show_name_ar);
-    $("#edit_name_en").val(show_name_en);
-    $(".ajax_nationality2").attr('action','/section/'+thiss.data('id'));
-
-}
    $(document).ready(function(e) {
    var domain = "{{ request()->getHost() }}";
    $(".ajax_nationality").ajaxForm({
@@ -132,35 +119,14 @@ function update_nationality(thiss,id){
                     }else if(data.status == 201){
                         
                         $(".append2").prepend(`<tr id="asdww${data.responseJSON.id}">
-                                            <td  class="ed_ar">${data.responseJSON.name_ar}</td>
-                                            <td  class="ed_en">${data.responseJSON.name_en}</td>
-                                            <td>${data.responseJSON.department.name_en} - ${data.responseJSON.department.name_ar}</td>
-                                            <td>
-                                                <a onclick="update_nationality(this,'asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
+                                            <td  class="ed_ar">${data.responseJSON.date}</td><td>
                                                 <button onclick="delete_tr(this,'payrolls','asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>`);
                                         $("#datatable").DataTable();
                         $(".clcl").trigger('click');
-                    }
-                    
-                }
-            });
-
-            $(".ajax_nationality2").ajaxForm({
-                complete: function(data){
-                    var mess = '';
-                    if(data.status == 422){
-                        for(let x in data.responseJSON.errors){
-                            mess += "<p>"+data.responseJSON.errors[x][0]+"</p>";
-                        }
-                        $(".message2").hide(0).html(mess).fadeIn();
                     }else if(data.status == 200){
-
-                        $("#"+idd).find(".ed_ar").text(data.responseJSON.name_ar);
-                        $("#"+idd).find(".ed_en").text(data.responseJSON.name_en);
-                        $("#datatable").DataTable();
-                        $(".clcl2").trigger('click');
+                        $(".message").hide(0).html(data.responseText).fadeIn();
                     }
                     
                 }
@@ -168,17 +134,6 @@ function update_nationality(thiss,id){
 
         });
 
-
-
-        var data2 = "{{ $departments2 }}";
-        var js = JSON.parse(data2.replace(/&quot;/g,'"'));
-
-        $(".inline-department").editable({
-            prepend: "not selected",
-            mode: "inline",
-            inputclass: "form-control-sm",
-            source: js
-        });
 </script>
 
 @if (app()->getLocale() == "ar")
@@ -210,86 +165,12 @@ aria-hidden="true">
         </div>
         <div class="modal-body">
 
-            <form action="/section" class="ajax_nationality" method="post">
-                @csrf
-
-                <div class="row mb-3">
-                    <label for="example-text-input" class="col-sm-2 col-form-label">{{__('Department')}}</label>
-                    <div class="col-sm-10">
-                        <select name="department_id" class="form-control" id="">
-                            <option value="" selected disabled></option>
-                            @foreach ($departments as $department)
-                            <option value="{{ $department->id }}">{{ $department->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="row mb-3">
-                    <label for="example-text-input" class="col-sm-2 col-form-label">{{__('Name (AR)')}}</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" name="name_ar" id="example-text-input">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="example-text-input" class="col-sm-2 col-form-label">{{__('Name (EN)')}}</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" name="name_en" id="example-text-input">
-                    </div>
-                </div>
-
-                
-
-
-                <div class="row mb-3">
-                    <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10">
-                        <button type="submit"
-                            class="btn btn-success waves-effect waves-light">{{__('Save')}}</button>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10 text-center message">
-
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title mt-0" id="myLargeModalLabel">{{__('Modification')}}</h5>
-            <button type="button" class="btn-close clcl2" data-bs-dismiss="modal" aria-label="Close">
-
-            </button>
-        </div>
-        <div class="modal-body">
-
-            <form action="" class="ajax_nationality2" method="post">
-                @method('PUT')
+            <form action="/payroll" class="ajax_nationality" method="post">
                 @csrf
                 <div class="row mb-3">
-                    <label for="edit_name_ar" class="col-sm-2 col-form-label">{{__('Name (AR)')}}</label>
+                    <label for="example-text-input" class="col-sm-2 col-form-label">{{__('Date')}}</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="name_ar" id="edit_name_ar">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="edit_name_en" class="col-sm-2 col-form-label">{{__('Name (EN)')}}</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" name="name_en" id="edit_name_en">
+                        <input class="form-control" type="month" name="date" id="example-text-input">
                     </div>
                 </div>
 
@@ -303,8 +184,7 @@ aria-hidden="true">
 
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10 text-center message2">
-
+                    <div class="col-sm-10 text-center message">
                     </div>
                 </div>
 
@@ -314,6 +194,5 @@ aria-hidden="true">
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 
 @endsection

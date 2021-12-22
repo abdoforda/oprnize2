@@ -68,10 +68,8 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
 
         //Payroll + deductions
         Route::resource('/deduction', 'DeductionController');
-        //Route::resource('/payroll', 'PayrollController');
-        Route::get('/payroll', function(){
-            return redirect('/');
-        });
+        Route::resource('/payroll', 'PayrollController');
+        
 
     }); 
 

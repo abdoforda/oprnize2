@@ -23,6 +23,11 @@ class Company extends Model
         return $this->belongsToMany(Nationality::class);
     }
 
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
+
     public function vacations(){
         return $this->hasMany(Vacation::class);
     }

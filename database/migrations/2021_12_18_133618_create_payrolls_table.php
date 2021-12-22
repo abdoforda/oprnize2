@@ -17,6 +17,7 @@ class CreatePayrollsTable extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->date('date');
+            $table->set('status',['progress','approved','rejected'])->default('progress');
             $table->timestamps();
             $table->softDeletes();
         });

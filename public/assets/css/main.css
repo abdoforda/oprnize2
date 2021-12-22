@@ -37,6 +37,13 @@
     box-shadow: 0px 0px 2px 0px #00895b;
 }
 
+.bt_num2 button{
+    width: 134px;
+    border-radius: 500px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 .choosse.clickable {
     background: #23c58f;
     color: #fff;

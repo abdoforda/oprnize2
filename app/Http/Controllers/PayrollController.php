@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Payroll;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PayrollController extends Controller
@@ -14,8 +16,8 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        $payrolls = Payroll::all();
-        return view('payroll.index',compact('payrolls'));
+        $nationalities  = Payroll::all();
+        return view('payroll.index',compact('nationalities'));
     }
 
     /**
@@ -36,7 +38,25 @@ class PayrollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date'=> ['required'],
+        ]);
+
+        $date = Carbon::parse($request->date);
+
+        
+        $pay = Payroll::where('date',$date)->first();
+
+        if($pay){
+            return __('This month payroll has been released');
+        }
+
+        $company_id = auth()->user()->company->id;
+        $nationality = new Payroll();
+        $nationality->date = $date;
+        $nationality->company_id = $company_id;
+        $nationality->save();
+        return $nationality;
     }
 
     /**
@@ -45,9 +65,10 @@ class PayrollController extends Controller
      * @param  \App\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function show(Payroll $payroll)
+    public function show($domain, Payroll $payroll)
     {
-        //
+       //return $payroll->ems();
+        return view('payroll.show',compact(['payroll']));
     }
 
     /**

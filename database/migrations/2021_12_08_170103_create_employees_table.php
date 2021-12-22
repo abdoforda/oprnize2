@@ -44,6 +44,10 @@ class CreateEmployeesTable extends Migration
             $table->decimal('available_balance')->default(0);
             $table->string('email')->nullable(); // end
             $table->decimal('salary')->default(0);
+            $table->decimal('hra_value')->default(0);
+            $table->decimal('hra_percentage')->default(0);
+            $table->decimal('trans_value')->default(0);
+            $table->decimal('trans_percentage')->default(0);
             $table->string('password')->nullable(); // end
             $table->timestamps();
             $table->softDeletes();

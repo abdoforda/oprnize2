@@ -19,7 +19,7 @@ class CreateAllowancesTable extends Migration
             $table->foreignId('employee_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name_en');
             $table->string('name_ar');
-            $table->set('type',['addition','deduction']);
+            $table->set('type',['hra','trans']);
             $table->decimal('value', 8, 2)->nullable();
             $table->decimal('percentage', 8, 2)->nullable();
             $table->timestamps();

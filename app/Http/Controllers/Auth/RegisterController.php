@@ -92,6 +92,7 @@ class RegisterController extends Controller
 
     public function register(Request $request){
 
+
         $request->validate([
             'domain' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
@@ -127,7 +128,8 @@ class RegisterController extends Controller
         ]; Vacation::insert($data2);
 
         $data3 = [
-            ['company_id'=>$company->id, 'name_en'=> 'HRA','name_ar'=> 'سكن', 'type'=> 'addition', 'percentage'=>25],
+            ['company_id'=>$company->id, 'name_en'=> 'HRA','name_ar'=> 'سكن', 'type'=> 'hra', 'percentage'=>25],
+            ['company_id'=>$company->id, 'name_en'=> 'Trans','name_ar'=> 'مواصلات', 'type'=> 'trans', 'percentage'=>10],
             ]; 
             Allowance::insert($data3);
 

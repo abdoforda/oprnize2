@@ -49,12 +49,14 @@
     "deduction2":"عمل إضافي",
     "overtime":"ساعات عمل إضافي",
     "OK01":"حسناََ",
+    "This month payroll has been released":"تم إصدار مسير رواتب لهذا الشهر",
     "Leave Types":"أنواع الإجازات",
     "Min":"الحد الأدني",
     "Max":"الحد الأقصي",
     "Customize":"تخصيص",
     "Allowances":"البدلات",
     "Desc":"وصف",
+    
     "Value":"القيمة",
     "Value in riyals":"القيمة بالريال",
     "value as a percentage":"القيمة بالنسبة المؤوية",
@@ -161,7 +163,16 @@
     "Delete":"حذف",
     "Information":"معلومات الموظف",
     "Personal Data":"بيانات شخصية",
-    "":"",
+    "Basic":"Basic",
+    "Housing":"Housing",
+    "Trans":"Trans",
+    "Overtime":"Overtime",
+    "Gosi":"Gosi",
+    "Absence":"Absence",
+    "Violation":"Violation",
+    "Advanced":"Advanced",
+    "Net Salary":"Net Salary",
+    "Job_Number":"J.N",
     "You welcome in":"مرحبا بك في"
     
 }
