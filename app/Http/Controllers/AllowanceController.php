@@ -44,7 +44,6 @@ class AllowanceController extends Controller
             'name_en'=> ['required'],
             'value'=> ['required_without:percentage','numeric','nullable'],
             'percentage'=> ['required_without:value','numeric','nullable'],
-            'type'=> Rule::in(['addition','deduction']),
         ]);
 
         $company_id = auth()->user()->company->id;
@@ -53,7 +52,7 @@ class AllowanceController extends Controller
         $nationality->name_en = $request->name_en;
         $nationality->value = $request->value;
         $nationality->percentage = $request->percentage;
-        $nationality->type = $request->type;
+        $nationality->type = "other";
         $nationality->company_id = $company_id;
         $nationality->employee_id = $request->employee_id;
         $nationality->save();
@@ -109,7 +108,6 @@ class AllowanceController extends Controller
             'name_en'=> ['required'],
             'value'=> ['required_without:percentage','numeric','nullable'],
             'percentage'=> ['required_without:value','numeric','nullable'],
-            'type'=> Rule::in(['addition','deduction']),
         ]);
 
         $nationality = Allowance::findOrFail($request->allowance);
@@ -121,7 +119,6 @@ class AllowanceController extends Controller
         $nationality->name_en = $request->name_en;
         $nationality->value = $request->value;
         $nationality->percentage = $request->percentage;
-        $nationality->type = $request->type;
         $nationality->employee_id = $request->employee_id;
         $nationality->save();
 

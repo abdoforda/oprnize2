@@ -413,6 +413,20 @@
                                                     </div>
                                                 </div>
 
+                                                <br />
+                                                <div class="row" style="padding: 4px; background: #f5f5f5; border-radius: 8px">
+                                                    <h4 class="header-title">{{__('Allowances')}}</h4>
+                                                    <div class="allowances_items">
+                                                        
+                                                    </div>
+                                                    
+                                                    <br />
+                                                    <br />
+                                                    <div class="col-md-12">
+                                                        <button type="button" onclick="add_allow()" class="btn btn-secondary btn-sm btn-block waves-effect waves-light mt-0">{{ __('Add a new allowance') }}</button>
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('Save') }}</button>
@@ -473,5 +487,21 @@
                 }
             });
         });
+
+
+
+        function add_allow(){
+            var html = `<div class="col-md-12">
+                            <div class="row">
+                                <div class="col"><input class="form-control" type="text" name="allowance_name_ar[]" placeholder="{{ __('Name (AR)') }}"></div>
+                                <div class="col"><input class="form-control" type="text" name="allowance_name_en[]" placeholder="{{ __('Name (EN)') }}"></div>
+                                <div class="col"><input class="form-control" type="text" name="allowance_value[]" placeholder="{{ __('Value in riyals') }}"></div>
+                                <div class="col"><input class="form-control" type="text" name="allowance_percentage[]" placeholder="{{ __('value as a percentage') }}"></div>
+                            </div>
+                        </div><br />`;
+
+            $(".allowances_items").append(html);
+
+        }
     </script>
 @endsection

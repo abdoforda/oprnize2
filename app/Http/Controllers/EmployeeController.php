@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Allowance;
 use App\Employee;
 use App\Nationality;
 use Illuminate\Http\Request;
@@ -75,6 +76,33 @@ class EmployeeController extends Controller
         $em->salary = $request->salary;
         $em->contract_start_date = $request->contract_start_date;
         $em->save();
+
+        foreach($request->allowance_name_ar as $index => $a){
+
+            $check = true;
+
+            if($request->allowance_name_ar[$index] == ''){ $check = false; }
+            if($request->allowance_name_en[$index] == ''){ $check = false; }
+            if($request->allowance_value[$index] == '' && $request->allowance_percentage[$index] == ''){ $check = false; }
+
+
+            if($check){
+
+                $company_id = auth()->user()->company->id;
+                $nationality = new Allowance();
+                $nationality->name_ar = $request->allowance_name_ar[$index];
+                $nationality->name_en = $request->allowance_name_en[$index];
+                $nationality->value = $request->allowance_value[$index];
+                $nationality->percentage = $request->allowance_percentage[$index];
+                $nationality->type = "other";
+                $nationality->company_id = $company_id;
+                $nationality->employee_id = $em->id;
+                $nationality->save();
+            }
+            
+
+        }
+
         return $em;
         
     }
