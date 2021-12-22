@@ -259,12 +259,16 @@
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('administration')}}</label>
-                                                            <div class="row choosse-input" data-select="">
-                                                                <label class="choosse">
-                                                                    <i class="fas fa-check-circle"></i>
-                                                                    <span>{{ __('text01') }}</span>
-                                                                    <input type="radio" class="hide"  value="male">
-                                                                </label>
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->department_id }}" @endisset>
+
+                                                                @foreach ($company->departments as $department)
+                                                                    <label class="choosse" onclick="gotosection({{ $department->id }});">
+                                                                        <i class="fas fa-check-circle"></i>
+                                                                        <span>{{ $department->name }}</span>
+                                                                        <input type="radio" class="hide" name="department_id" value="{{ $department->id }}">
+                                                                    </label>
+                                                                @endforeach
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,12 +276,16 @@
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('Sections')}}</label>
-                                                            <div class="row choosse-input" data-select="">
-                                                                <label class="choosse">
-                                                                    <i class="fas fa-check-circle"></i>
-                                                                    <span>{{ __('text01') }}</span>
-                                                                    <input type="radio" class="hide" value="male">
-                                                                </label>
+                                                            <div class="row choosse-input section2" @isset($em) data-select="{{ $em->section_id }}" @endisset>
+                                                                @isset($sections)
+                                                                    @foreach ($sections as $item)
+                                                                    <label class="choosse" onclick="gotojob({{ $item->id }});">
+                                                                        <i class="fas fa-check-circle"></i>
+                                                                        <span>{{ $item->name }}</span>
+                                                                        <input type="radio" class="hide" name="section_id" value="{{ $item->id }}">
+                                                                    </label>
+                                                                    @endforeach
+                                                                @endisset
                                                             </div>
                                                         </div>
                                                     </div>
@@ -285,12 +293,16 @@
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('Job title')}}</label>
-                                                            <div class="row choosse-input" data-select="">
+                                                            <div class="row choosse-input add_job2" @isset($em) data-select="{{ $em->job_id }}" @endisset>
+                                                                @isset($jobs)
+                                                                @foreach ($jobs as $item)
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
-                                                                    <span>{{ __('test') }}</span>
-                                                                    <input type="radio" class="hide" name="job_id" value="male">
+                                                                    <span>{{ $item->name }}</span>
+                                                                    <input type="radio" class="hide" name="job_id" value="{{ $item->id }}">
                                                                 </label>
+                                                                @endforeach
+                                                            @endisset
                                                             </div>
                                                         </div>
                                                     </div>
@@ -499,6 +511,10 @@
                     }else if(data.status == 200){
                         Success("{{__('Saved Ok')}}");
                     }
+                    else if(data.status == 201){
+                        Success("{{__('Saved Ok')}}");
+                        window.location.href = '/employee';
+                    }
                     
                 }
             });
@@ -518,6 +534,60 @@
 
             $(".allowances_items").append(html);
 
+        }
+
+        var c = 0;
+        function gotosection(section){
+            $(".section2").html('').hide(0);
+            $(".add_job2").html('').hide(0);
+            if(c == 0){
+                $.get('/get_sections_from_department_id',{section},function(e){
+                    e.forEach(add_section);
+                    $(".section2").fadeIn();
+                });
+                c = 1;
+            }
+            setTimeout(() => {
+                c = 0;
+            }, 100);
+        }
+
+        function add_section(i){
+            $(".section2").append(`<label class="choosse" onclick="gotojob(${i.id});">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${lang2(i)}</span>
+                            <input type="radio" class="hide" name="section_id" value="${i.id}">
+                        </label>`);
+        }
+
+        var c = 0;
+        function gotojob(job){
+            $(".add_job2").html('').hide(0);
+            if(c == 0){
+                $.get('/get_jobs_from_section_id',{job},function(e){
+                    e.forEach(add_job);
+                    $(".add_job2").fadeIn();
+                });
+                c = 1;
+            }
+            setTimeout(() => {
+                c = 0;
+            }, 100);
+        }
+
+        function add_job(i){
+            $(".add_job2").append(`<label class="choosse">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${lang2(i)}</span>
+                            <input type="radio" class="hide" name="job_id" value="${i.id}">
+                        </label>`);
+        }
+
+        function lang2(model){
+            if(lang == "ar"){
+                return model.name_ar;
+            }
+            return model.name_en;
         }
     </script>
 @endsection

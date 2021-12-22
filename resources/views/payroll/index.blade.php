@@ -119,7 +119,7 @@ var idd = "";
                     }else if(data.status == 201){
                         
                         $(".append2").prepend(`<tr id="asdww${data.responseJSON.id}">
-                                            <td  class="ed_ar">${data.responseJSON.date}</td><td>
+                                            <td  class="ed_ar"><a href="/payroll/${data.responseJSON.id}">${data.responseJSON.date}</a></td><td>
                                                 <button onclick="delete_tr(this,'payrolls','asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>`);

@@ -20,9 +20,11 @@ class CreateEmployeesTable extends Migration
             $table->string('name_ar'); // end
             $table->string('name_en'); // end
             $table->foreignId('nationality_id')->nullable()->constrained()->onDelete('cascade'); // end
+            $table->foreignId('department_id')->nullable()->constrained()->onDelete('cascade'); // end
+            $table->foreignId('section_id')->nullable()->constrained()->onDelete('cascade'); // end
+            $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade'); // end
             $table->string('photo')->nullable();
             $table->string('job_number'); // end
-            $table->string('job_id')->nullable(); // end
             $table->date('birthdate')->nullable();
             $table->set('marital_status',['married','single'])->nullable(); // end
             $table->set('gender',['male','female'])->nullable(); // end
@@ -45,9 +47,9 @@ class CreateEmployeesTable extends Migration
             $table->string('email')->nullable(); // end
             $table->decimal('salary')->default(0);
             $table->decimal('hra_value')->nullable();
-            $table->decimal('hra_percentage')->nullable(0);
-            $table->decimal('trans_value')->nullable(0);
-            $table->decimal('trans_percentage')->nullable(0);
+            $table->decimal('hra_percentage')->nullable();
+            $table->decimal('trans_value')->nullable();
+            $table->decimal('trans_percentage')->nullable();
             $table->string('password')->nullable(); // end
             $table->timestamps();
             $table->softDeletes();

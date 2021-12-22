@@ -87,6 +87,12 @@ class JobController extends Controller
         //
     }
 
+    public function get_jobs_from_section_id(Request $request)
+    {
+        $department = Section::find($request->job);
+        return $department->jobs;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

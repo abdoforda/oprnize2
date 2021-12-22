@@ -44,7 +44,11 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::get('/setting', 'SettingController@edit');
         Route::post('/setting', 'SettingController@update');
         Route::resource('nationality', 'NationalityController');
+
+        //department
         Route::resource('department', 'DepartmentController');
+        Route::get('get_sections_from_department_id', 'SectionController@get_sections_from_department_id');
+        Route::get('get_jobs_from_section_id', 'JobController@get_jobs_from_section_id');
         
         //sections
         Route::resource('section', 'SectionController');

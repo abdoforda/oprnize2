@@ -85,6 +85,12 @@ class SectionController extends Controller
         //
     }
 
+    public function get_sections_from_department_id(Request $request)
+    {
+        $department = Department::find($request->section);
+        return $department->sections;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

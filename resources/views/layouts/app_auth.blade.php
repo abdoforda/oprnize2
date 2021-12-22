@@ -51,6 +51,10 @@ dir="ltr"
     <script>
         var lang = "ar";
     </script>
+    @else
+    <script>
+        var lang = "en";
+    </script>
     @endif
 </head>
 
