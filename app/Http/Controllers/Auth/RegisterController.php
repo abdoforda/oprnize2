@@ -131,7 +131,7 @@ class RegisterController extends Controller
             ['company_id'=>$company->id, 'name_en'=> 'HRA','name_ar'=> 'سكن', 'type'=> 'hra', 'percentage'=>25],
             ['company_id'=>$company->id, 'name_en'=> 'Trans','name_ar'=> 'مواصلات', 'type'=> 'trans', 'percentage'=>10],
             ]; 
-            Allowance::insert($data3);
+            //Allowance::insert($data3);
 
         $email = [
             'domain' => $request->domain,

@@ -416,6 +416,22 @@
                                                 <br />
                                                 <div class="row" style="padding: 4px; background: #f5f5f5; border-radius: 8px">
                                                     <h4 class="header-title">{{__('Allowances')}}</h4>
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col"><input class="form-control" type="text" disabled  placeholder="بدل السكن"></div>
+                                                            <div class="col"><input class="form-control" type="text" disabled  placeholder="HRA"></div>
+                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->hra_value }}" @endisset name="hra_value" placeholder="{{ __('Value in riyals') }}"></div>
+                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->hra_percentage }}" @endisset name="hra_percentage" placeholder="{{ __('value as a percentage') }}"></div>
+                                                        </div>
+                                                    </div><br /><br /><br />
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col"><input class="form-control" type="text" disabled  placeholder="بدل المواصلات"></div>
+                                                            <div class="col"><input class="form-control" type="text"  disabled placeholder="Trans"></div>
+                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->trans_value }}" @endisset name="trans_value" placeholder="{{ __('Value in riyals') }}"></div>
+                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->trans_percentage }}" @endisset name="trans_percentage" placeholder="{{ __('value as a percentage') }}"></div>
+                                                        </div>
+                                                    </div><br /><br /><br />
                                                     <div class="allowances_items">
                                                         
                                                     </div>

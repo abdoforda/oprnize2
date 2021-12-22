@@ -74,6 +74,10 @@ class EmployeeController extends Controller
         $em->name_en = $request->name_en;
         $em->job_number = $request->job_number;
         $em->salary = $request->salary;
+        $em->hra_value = $request->hra_value;
+        $em->hra_percentage = $request->hra_percentage;
+        $em->trans_value = $request->trans_value;
+        $em->trans_percentage = $request->trans_percentage;
         $em->contract_start_date = $request->contract_start_date;
         $em->save();
 
