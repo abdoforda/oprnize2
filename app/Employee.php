@@ -36,18 +36,43 @@ class Employee extends Model
         return $em;
     }
 
-    public static function daily_salary(Employee $em, $date_start,$date_end){
+    public static function Hourly_salary_in_basic(Employee $em, $date_start,$date_end){
+        
+        $salary = $em->salary;
+
         if($em->company->month_calculator == "30days"){
-            return ($em->salary / 30);
+            return ($salary / 240);
         }
 
         $days = Carbon::parse($date_end)->daysInMonth;
-        return ($em->salary / $days);
+        $hours = $days*8;
+        
+        return ($salary / $hours);
+    }
+
+    public static function Hourly_salary_in_total(Employee $em, $date_start,$date_end){
+        
+        $salary = ($em->salary+$em->payroll_hra()+$em->payroll_trans()+$em->payroll_allowances());
+
+        if($em->company->month_calculator == "30days"){
+            return ($salary / 240);
+        }
+
+        $days = Carbon::parse($date_end)->daysInMonth;
+        $hours = $days*8;
+        
+        return ($salary / $hours);
     }
 
     public function deductions(){
         return $this->hasMany(Deduction::class);
     }
+
+    public function allowances(){
+        return $this->hasMany(Allowance::class);
+    }
+
+    
 
     public function overtimes(){
         return $this->deductions()->where('type','overtime');
@@ -60,19 +85,56 @@ class Employee extends Model
 
     public function payroll_hra(){
 
-        if($this->nationality_id == 1){
-            $salary = $this->salary;
+        if($this->hra_value != ''){
+            return $this->hra_value;
+        }
+        
+        if($this->hra_percentage != ''){
+            return percentage($this->hra_percentage, $this->salary);
         }
         return 0.00;
+    }
+
+    public function payroll_trans(){
+
+        if($this->trans_value != ''){
+            return $this->trans_value;
+        }
+        
+        if($this->trans_percentage != ''){
+            return percentage($this->trans_percentage, $this->salary);
+        }
+        return 0.00;
+    }
+
+    public function payroll_allowances(){
+
+        $allowances = $this->allowances;
+        $num = 0;
+        foreach($allowances as $allowance){
+            if($allowance->value != ''){
+                $num += $allowance->value;
+            }
+            
+            if($allowance->percentage != ''){
+                $num += percentage($allowance->percentage, $this->salary);
+            }
+        }
+        return $num;
     }
 
     public function payroll_gosi(){
 
         if($this->nationality_id == 1){
-            $salary = $this->salary;
+            return (percentage(10, ($this->salary+$this->payroll_hra()))) * -1;
         }
         return 0.00;
     }
+
+    public function payroll_net_salary(){
+      return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->payroll_gosi());
+    }
+
 
 
 }

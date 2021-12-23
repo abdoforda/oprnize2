@@ -95,6 +95,7 @@
                                             <th>{{__('Basic')}}</th>
                                             <th>{{__('Housing')}}</th>
                                             <th>{{__('Trans')}}</th>
+
                                             <th>{{__('Allowances')}}</th>
                                             <th>{{__('Overtime')}}</th>
                                             <th>{{__('Gosi')}}</th>
@@ -113,16 +114,17 @@
                                                 <td>{{$em->job_number}}</td>
                                                 <td>{{$em->name}}</td>
                                                 <td style="background: #f7f7f7;">{{$em->salary}}</td>
-                                                <td style="background: #f7f7f7;">{{$em->salary}}</td>
-                                                <td style="background: #f7f7f7;">{{$em->salary}}</td>
-                                                <td style="background: #f7f7f7;">{{$em->salary}}</td>
-                                                <td style="background: #bbffc3;">{{ number_format($em->payroll_allowances, 2) }}</td>
-                                                <td style="background: #ffd3d3;">{{$em->salary}}</td>
-                                                <td>{{$em->salary}}</td>
-                                                <td>{{$em->salary}}</td>
-                                                <td>{{$em->salary}}</td>
-                                                <td>{{$em->salary}}</td>
-                                                <td>{{$em->salary}}</td>
+                                                <td style="background: #f7f7f7;">{{ number_format($em->payroll_hra(),2) }}</td>
+                                                <td style="background: #f7f7f7;">{{ number_format($em->payroll_trans(),2) }}</td>
+                                                <td style="background: #bbffc3;">{{ number_format($em->payroll_allowances(), 2) }}</td>
+                                                
+                                                <td style="background: #bbffc3;">{{ number_format($em->payroll_overtime, 2) }}</td>
+                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_gosi(), 2) }}</td>
+                                                <td> ------ </td>
+                                                <td> ------ </td>
+                                                <td> ------ </td>
+                                                <td>{{ number_format($em->payroll_net_salary()+$em->payroll_overtime, 2) }}</td>
+                                                <td> ------ </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
