@@ -35,7 +35,7 @@ File: Main Css File
 .navbar-brand-box {
   padding: 0 1.5rem;
   text-align: center;
-  width: 260px; }
+  width: 224px; }
 
 .logo {
   line-height: 70px; }
@@ -56,7 +56,7 @@ File: Main Css File
   background-position: center;
   background-color: #525ce5;
   margin: 0 -24px 23px -24px;
-  padding: 24px 24px 92px 24px;
+  padding: 24px 24px 93px 24px;
   color: #fff;
   background-size: cover; }
 
@@ -363,7 +363,7 @@ body[data-layout="horizontal"] .footer {
     transition-property: height, visibility; }
 
 .vertical-menu {
-  width: 260px;
+  width: 224px;
   z-index: 1001;
   background: #ffffff;
   bottom: 0;
@@ -400,7 +400,7 @@ body[data-layout="horizontal"] .footer {
       margin-right: -15px; }
 
 .main-content {
-  margin-right: 260px;
+  margin-right: 224px;
   overflow: hidden; }
   .main-content .content {
     padding: 0 15px 10px 15px;
@@ -3010,7 +3010,7 @@ div.dataTables_wrapper div.dataTables_filter {
   border-radius: 5px; }
 
 .email-rightbar {
-  margin-right: 260px; }
+  margin-right: 224px; }
 
 .chat-user-box p.user-title {
   color: #343a40;

@@ -8,6 +8,7 @@ use App\Department;
 use App\Job;
 use App\Nationality;
 use App\Section;
+use App\User;
 use App\Vacation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,14 @@ class SettingController extends Controller
         return view("setting.edit", compact('nationalities','company'));
     }
 
+    public function check_email(Request $request){
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            return "error";
+        }
+
+        return "asd";
+    }
     public function update(Request $request){
 
         $request->validate([

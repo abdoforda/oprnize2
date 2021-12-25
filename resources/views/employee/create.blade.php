@@ -65,10 +65,21 @@
                                                 {{ __('The fildes in color') }} <code class="highlighter-rouge dir01">{{ __('red') }}</code> {{ __('are mandatory') }}
                                             </p>
                                             
-                                            <form action="/employee" method="POST" class="needs-validation ajax_em_store" novalidate="">
+                                            <form @isset($em) action="/employee_update" @else action="/employee" @endisset  method="POST" class="needs-validation ajax_em_store" novalidate="">
                                                 @csrf
+                                                
+                                                @isset($em)
+                                                <input name="id_em" type="hidden" value="{{ $em->id }}">
+                                                @endisset
+
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-2">
+                                                        <div class="mb-3">
+                                                            <label  class="form-label">{{__('Job Number')}}</label>
+                                                            <input type="text" class="form-control" id="validationCustom01" name="job_number" @isset($em) value="{{ $em->job_number }}" @endisset required="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Employee Name (AR)')}}</label>
                                                             <input type="text" class="form-control" id="validationCustom01" name="name_ar" @isset($em) value="{{ $em->name_ar }}" @endisset required="">
@@ -77,13 +88,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="validationCustom02" class="form-label">{{__('Employee Name (EN)')}}</label>
                                                             <input type="text" class="form-control" id="validationCustom02" name="name_en" @isset($em) value="{{ $em->name_en }}" @endisset required="">
                                                             <div class="valid-feedback">
                                                                 Looks good!
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mb-3">
+                                                            <label  class="form-label">{{__('Birthdate')}}</label>
+                                                            <input type="text" class="form-control" id="validationCustom01" name="birthdate" @isset($em) value="{{ $em->birthdate }}" @endisset required="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -249,13 +266,7 @@
                                                 <br />
                                                 <div class="row">
                                                     <h4 class="header-title">{{__('Job data')}}</h4>
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
-                                                            <label  class="form-label">{{__('Job Number')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="job_number" @isset($em) value="{{ $em->job_number }}" @endisset required="">
-                                                        </div>
-                                                    </div>
-
+                                                    
                                                     <div class="col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">{{__('administration')}}</label>
@@ -365,7 +376,7 @@
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Contract Start Date')}}</label>
                                                             <div class="input-group" id="datepicker8">
-                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_start_date }}" @endisset name="contract_start_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_start_date }}" @endisset name="contract_start_date" autocomplete="off" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker8' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -378,7 +389,7 @@
                                                         <div class="mb-3">
                                                             <label  class="form-label">{{__('Contract End Date')}}</label>
                                                             <div class="input-group" id="datepicker9">
-                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_end_date }}" @endisset name="contract_end_date" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->contract_end_date }}" @endisset name="contract_end_date"  autocomplete="off" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker9' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
@@ -432,16 +443,16 @@
                                                         <div class="row">
                                                             <div class="col"><input class="form-control" type="text" disabled  placeholder="بدل السكن"></div>
                                                             <div class="col"><input class="form-control" type="text" disabled  placeholder="HRA"></div>
-                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->hra_value }}" @endisset name="hra_value" placeholder="{{ __('Value in riyals') }}"></div>
-                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->hra_percentage }}" @endisset name="hra_percentage" placeholder="{{ __('value as a percentage') }}"></div>
+                                                            <div class="col"><input class="form-control em_other_in" data-other="hra_percentage" type="number" @isset($em) value="{{ $em->hra_value }}" @endisset name="hra_value" placeholder="{{ __('Value in riyals') }}"></div>
+                                                            <div class="col"><input class="form-control em_other_in" data-other="hra_value" type="number" @isset($em) value="{{ $em->hra_percentage }}" @endisset name="hra_percentage" placeholder="{{ __('value as a percentage') }}"></div>
                                                         </div>
                                                     </div><br /><br /><br />
                                                     <div class="col-md-12">
                                                         <div class="row">
                                                             <div class="col"><input class="form-control" type="text" disabled  placeholder="بدل المواصلات"></div>
                                                             <div class="col"><input class="form-control" type="text"  disabled placeholder="Trans"></div>
-                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->trans_value }}" @endisset name="trans_value" placeholder="{{ __('Value in riyals') }}"></div>
-                                                            <div class="col"><input class="form-control" type="number" @isset($em) value="{{ $em->trans_percentage }}" @endisset name="trans_percentage" placeholder="{{ __('value as a percentage') }}"></div>
+                                                            <div class="col"><input class="form-control em_other_in" data-other="trans_percentage" type="number" @isset($em) value="{{ $em->trans_value }}" @endisset name="trans_value" placeholder="{{ __('Value in riyals') }}"></div>
+                                                            <div class="col"><input class="form-control em_other_in" data-other="trans_value" type="number" @isset($em) value="{{ $em->trans_percentage }}" @endisset name="trans_percentage" placeholder="{{ __('value as a percentage') }}"></div>
                                                         </div>
                                                     </div><br /><br /><br />
                                                     <div class="allowances_items">
@@ -500,14 +511,25 @@
     <script>
         $(document).ready(function(e) {
             $(".ajax_em_store").ajaxForm({
+                beforeSend : function(){
+                    $(".invalid-feedback").remove();
+                    $(".is-invalid").removeClass("is-invalid");
+                },
                 complete: function(data){
                     var mess = '';
                     if(data.status == 422){
+
+                        error_message(data.responseJSON.message);
+                        errors(data.responseJSON.errors);
+
                         for(let x in data.responseJSON.errors){
-                            mess += "<p>"+data.responseJSON.errors[x][0]+"</p>";
+                            //mess += "<p>"+data.responseJSON.errors[x][0]+"</p>";
                         }
-                        $(".massage_errors").hide(0).html(mess).fadeIn();
-                        $(".show_errors").trigger('click');
+
+                        //$(".massage_errors").hide(0).html(mess).fadeIn();
+                        //$(".show_errors").trigger('click');
+
+                        
                     }else if(data.status == 200){
                         Success("{{__('Saved Ok')}}");
                     }

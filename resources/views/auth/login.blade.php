@@ -100,22 +100,26 @@
     $(document).ready(function(e) {
             var domain = "{{ request()->getHost() }}";
             $(".ajax").ajaxForm({
+                beforeSend : function(){
+                    $(".form-control").removeClass("is-invalid");
+                },
                 complete: function(data){
                     var mess = '';
                     if(data.status == 422){
                         for(let x in data.responseJSON.errors){
                             mess += "<p>"+data.responseJSON.errors[x][0]+"</p>";
                         }
-                        $(".message").hide(0).html(mess).fadeIn();
+                        $(".message").hide(0).html(mess).fadeIn().css({"color":"red"});
+                        $(".form-control").addClass("is-invalid");
                     }else if(data.status == 200){
 
                         if(data.responseText == "success"){
-                            $(".message").hide(0).html("{{__('You are logged in, you are being transferred now')}}").fadeIn();
+                            $(".message").hide(0).html("{{__('You are logged in, you are being transferred now')}}").fadeIn().css({"color":"black"});;
                             setTimeout(() => {
                             window.location.href = window.location.href;
                         }, 3000);
                         }else{
-                            $(".message").hide(0).html(data.responseText).fadeIn();
+                            $(".message").hide(0).html(data.responseText).fadeIn().css({"color":"red"});;
                         }
                     }
                     

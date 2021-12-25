@@ -27,7 +27,7 @@ class Employee extends Model
 
     public static function search_from_job_number($job_number){
         $em = Employee::query()
-        ->where('job_number', 'LIKE', "%{$job_number}%")
+        ->where('job_number', '=', "%{$job_number}%")
         ->orWhere('name_ar', 'LIKE', "%{$job_number}%")
         ->orWhere('name_en', 'LIKE', "%{$job_number}%")->first();
         if($em){

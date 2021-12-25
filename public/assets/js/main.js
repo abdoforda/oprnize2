@@ -19,6 +19,19 @@ function toast_message(notes, message,confirm){
     })
 }
 
+
+function error_message(){
+
+    var m = "The given data was invalid";
+    if(lang == "ar"){
+        m = "هناك بيانات يجب إدخالها";
+    }
+    Swal.fire({
+        text: m,
+        icon: "warning",
+    })
+}
+
 $(".choosse-input").on("click", ".choosse", function () {
     $(this).closest(".choosse-input").find(".choosse").removeClass("clickable");
     $(this).closest(".choosse-input").find(".choosse").find("i").hide(0);
@@ -85,6 +98,20 @@ function delete_tr(thiss,table,idd){
     
 }
 
+function errors(json){
+    for (var key in json) {
+        console.log(key);
+        console.log(json[key][0]);
+		
+		if($("input[name='"+key+"']").data("provide")=="datepicker"){
+			$("input[name='"+key+"']").closest(".input-group").find("span").after(`<div class="invalid-feedback" style="display: block;">${json[key][0]}</div>`);;
+		}else{
+			$("input[name='"+key+"']").addClass("is-invalid").after(`<div class="invalid-feedback" style="display: block;">${json[key][0]}</div>`);	
+		}
+		
+    }
+}
+
 $(document).ready(function (e) {
     $(".choosse-input").each(function (index) {
         var th = $(this).data("select");
@@ -122,4 +149,12 @@ $(document).ready(function (e) {
             });
         }
     });
+
+    $(".em_other_in").keyup(function(e) {
+        var other = $(this).data("other");
+        if($(this).val() != ''){
+            $("input[name='"+other+"']").val("");
+        }
+    });
+
 });

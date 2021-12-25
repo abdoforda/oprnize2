@@ -94,8 +94,8 @@ class RegisterController extends Controller
 
 
         $request->validate([
-            'domain' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+            'domain' => ['required', 'string', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', 'max:255', 'unique:users'],
+            'email' => ['required', 'string','email', 'max:255', 'unique:users']
         ]);
 
         $pass = Str::random(8);

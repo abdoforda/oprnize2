@@ -49,12 +49,14 @@
                                     </div>
 
                                     <div class="row mb-0">
-                                        <div class="col-12 text-end">
-                                            <button onclick="next();"
+                                        <div class="col-12 text-end"
+                                        >
+
+                                            <button @if (app()->getLocale() == "en") style="float: right;" @endif onclick="next();"
                                                 class="btsub btn btn-primary w-md waves-effect waves-light"
                                                 type="button">{{__('Next')}}</button>
 
-                                            <button style="float: right;" onclick="back();"
+                                            <button @if (app()->getLocale() == "ar") style="float: right;" @endif onclick="back();"
                                                 class="btn btn-primary w-md waves-effect waves-light bt-back"
                                                 type="button">{{__('Previous')}}</button>
                                         </div>
@@ -107,12 +109,28 @@
                 return;
             }
 
-            $(".bt-back").slideDown();
-            $(".o-email").slideUp();
-            $(".o-subdomain").slideDown();
-            setTimeout(() => {
-                $(".btsub").text("{{__('Register now')}}").attr('type','submit');
-            }, 100);
+            $.get('check_email',{email},function(ee){
+
+                if(ee == "asd"){
+                    $(".bt-back").slideDown();
+                $(".o-email").slideUp();
+                $(".o-subdomain").slideDown();
+                setTimeout(() => {
+                    $(".btsub").text("{{__('Register now')}}").attr('type','submit');
+                }, 100);
+                $("#useremail").removeClass("is-invalid");
+                $(".message").hide(0).html("").fadeIn().css({"color":"red"});
+                }else{
+                    $(".message").hide(0).html("{{__('This mail is already registered with us')}}").fadeIn().css({"color":"red"});
+            $("#useremail").addClass("is-invalid");
+                }
+
+                
+                
+            });
+
+            
+           
 
         }
 
@@ -137,10 +155,10 @@
                         $(".message").hide(0).html(mess).fadeIn();
                         console.log(data.responseJSON.errors);
                     }else if(data.status == 201){
-                        $(".message").hide(0).html("{{__('Your company has been successfully registered, you are now being transferred')}}").fadeIn();
+                        $(".message").hide(0).html("{{__('Your company has been successfully registered, and the password has been sent to your email with login details')}}").fadeIn();
                         setTimeout(() => {
                             window.location.href = "http://"+data.responseJSON.domain+"."+domain;
-                        }, 3000);
+                        }, 15000);
                         
                     }
                     

@@ -34,7 +34,7 @@
 
             
 
-                <div class="row">
+                <div class="row" style="display: none;">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -44,14 +44,14 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label red">{{ __('name company (EN)') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="name_en" value="{{ $company->name_en }}" type="text" placeholder="{{ __('name company (EN)') }}" id="example-text-input">
+                                        <input class="form-control" name="name_en" value="demo" type="text" placeholder="{{ __('name company (EN)') }}" id="example-text-input">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="example-text-input2" class="col-sm-2 col-form-label red">{{ __('name company (AR)') }}</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="name_ar" value="{{ $company->name_ar }}" type="text" placeholder="{{ __('name company (AR)') }}" id="example-text-input2">
+                                        <input class="form-control" name="name_ar" value="demo" type="text" placeholder="{{ __('name company (AR)') }}" id="example-text-input2">
                                     </div>
                                 </div>
 

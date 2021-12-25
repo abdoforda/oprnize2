@@ -40,6 +40,8 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
             return redirect('/setting');
         });
 
+        
+
         Route::get('/delete_tr', 'SettingController@delete_tr');
         Route::get('/setting', 'SettingController@edit');
         Route::post('/setting', 'SettingController@update');
@@ -68,6 +70,7 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
 
         //employee
         Route::resource('/employee', 'EmployeeController');
+        Route::post('/employee_update', 'EmployeeController@update2');
         Route::get('/search_employee', 'EmployeeController@search_employee');
 
         //Payroll + deductions
@@ -81,7 +84,7 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
 
 
 
-
+Route::get('/check_email', 'SettingController@check_email');
 Route::post('/register', 'Auth\RegisterController@register')->name('register2');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 
