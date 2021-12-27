@@ -59,7 +59,7 @@
 
                                     <tbody>
                                         @foreach ($employees as $index => $employee)
-                                        <tr>
+                                        <tr id="updater{{$index}}">
                                             <td><a href="/employee/{{ $employee->id }}">{{ $employee->name }}</a></td>
                                             <td>{{ $employee->job_number }}</td>
                                             <td>{{ number_format($employee->payroll_net_salary_in_emp(), 2) }}</td>
