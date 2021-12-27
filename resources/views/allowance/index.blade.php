@@ -62,6 +62,7 @@
 
                                     <tbody class="append2">
                                         @foreach ($nationalities as $index => $nationality)
+                                        @if ($nationality->employee == NULL)
                                         <tr id="updater{{$index}}">
                                             <td class="ed_ar">{{ $nationality->name_ar }}</td>
                                             <td class="ed_en">{{ $nationality->name_en }}</td>
@@ -75,6 +76,8 @@
                                                 <button onclick="delete_tr(this,'allowances','updater{{$index}}',)" data-id="{{ $nationality->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>
+                                        @endif
+                                        
                                         @endforeach
                                         
                                     </tbody>

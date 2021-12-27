@@ -41,7 +41,7 @@
                                     <div class="mb-3 o-subdomain" style="display: none;">
                                         <label for="useremail">{{__('Company subdomain')}}</label>
                                         <div class="input-group" style="direction: ltr;">
-                                            <input name="domain" style="border-radius: 6px 0px 0px 6px;" type="text"
+                                            <input name="domain" style="border-radius: 6px 0px 0px 6px;text-transform: lowercase;" type="text"
                                                 class="form-control" placeholder="{{__('Company subdomain')}}">
                                             <span style="border-radius: 0px 6px 6px 0px;"
                                                 class="input-group-text">.oprnize.com</span>

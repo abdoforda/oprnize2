@@ -23,7 +23,7 @@
                     <div class="col-sm-6">
                         <div class="float-end d-none d-sm-block">
                             <a data-bs-toggle="modal"
-                            data-bs-target=".bs-example-modal-lg" class="btn btn-success">{{__('Add a new')}} {{__('Deductions')}}</a>
+                            data-bs-target=".bs-example-modal-lg" class="btn btn-success">{{__('Add a new')}} {{__('deduction2')}}</a>
 
                             <a data-bs-toggle="modal"
                             data-bs-target=".bs-example-modal-lg3" class="btn btn-warning">{{__('Add a new')}} {{__('overtime')}}</a>

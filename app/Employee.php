@@ -4,6 +4,7 @@ namespace App;
 
 use App\Scopes\CompanyScope;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,7 +28,7 @@ class Employee extends Model
 
     public static function search_from_job_number($job_number){
         $em = Employee::query()
-        ->where('job_number', '=', "%{$job_number}%")
+        ->where('job_number', $job_number)
         ->orWhere('name_ar', 'LIKE', "%{$job_number}%")
         ->orWhere('name_en', 'LIKE', "%{$job_number}%")->first();
         if($em){
@@ -72,7 +73,10 @@ class Employee extends Model
         return $this->hasMany(Allowance::class);
     }
 
-    
+
+    public function deduction2(){
+        return $this->deductions()->where('type','deduction2');
+    }
 
     public function overtimes(){
         return $this->deductions()->where('type','overtime');
@@ -124,16 +128,41 @@ class Employee extends Model
     }
 
     public function payroll_gosi(){
-
+        
         if($this->nationality_id == 1){
             return (percentage(10, ($this->salary+$this->payroll_hra()))) * -1;
         }
         return 0.00;
     }
 
-    public function payroll_net_salary(){
-      return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->payroll_gosi());
+    
+    
+
+    public function payroll_absence(){
+
+        $allowances = $this->deduction2;
+        $num = 0;
+        foreach($allowances as $allowance){
+            if($allowance->value != ''){
+                $num += $allowance->value;
+            }
+        }
+        return $num * -1;
+
     }
+
+    // كل الخصومات
+    public function total_deductions(){
+        return ($this->payroll_gosi()+$this->payroll_absence());
+    }
+
+    public function payroll_net_salary(){
+        return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->total_deductions());
+        }
+
+        public function payroll_net_salary_in_emp(){
+            return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->payroll_gosi());
+        }
 
 
 

@@ -102,7 +102,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => "Demo",
             'email' => $request->email,
-            'domain' => $request->domain,
+            'domain' => strtolower($request->domain),
             'password' => Hash::make($pass)
         ]);
 

@@ -229,22 +229,7 @@ dir="ltr"
                         </li>
 
 
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-toggles"></i>
-                                <span>{{ __('Company Settings') }}</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="/nationality">{{ __('nationalities') }}</a></li>
-                                <li><a href="/department">{{ __('Departments') }}
-                                
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a></li>
-                                <li><a href="/section">{{ __('Sections') }}</a></li>
-                                <li><a href="/job">{{ __('Jobs') }}</a></li>
-                                <li><a href="/setting">{{ __('General Settings') }}</a></li>
-                            </ul>
-                        </li>
+                        
 
                         <li>
                             <a href="/vacation" class=" waves-effect">
@@ -253,12 +238,7 @@ dir="ltr"
                             </a>
                         </li>
 
-                        <li>
-                            <a href="/allowance" class=" waves-effect">
-                                <i class="dripicons-user-group"></i>
-                                <span>{{__('Allowances')}}</span>
-                            </a>
-                        </li>
+                        
 
                         <li>
                             <a href="/deduction" class=" waves-effect">
@@ -274,7 +254,25 @@ dir="ltr"
                             </a>
                         </li>
 
-                        
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="dripicons-toggles"></i>
+                                <span>{{ __('Settings') }}</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/nationality">{{ __('nationalities') }}</a></li>
+                                <li><a href="/department">{{ __('Departments') }}
+                                
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a></li>
+                                <li><a href="/section">{{ __('Sections') }}</a></li>
+                                <li><a href="/job">{{ __('Jobs') }}</a></li>
+                                <li><a href="/setting">{{ __('General Settings') }}</a></li>
+                                <li><a href="/allowance">{{ __('Allowances') }}</a></li>
+                                
+                            </ul>
+                        </li>
+
 
                     </ul>
                 </div>

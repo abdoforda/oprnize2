@@ -8,6 +8,7 @@ use App\Employee;
 use App\Nationality;
 use App\Section;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -106,6 +107,8 @@ class EmployeeController extends Controller
         $em->contract_start_date = $request->contract_start_date;
         $em->save();
 
+
+
         if($request->allowance_name_ar){
             foreach($request->allowance_name_ar as $index => $a){
 
@@ -187,7 +190,7 @@ class EmployeeController extends Controller
             'id_em' => ['required'],
             'name_ar' => ['required'],
             'name_en' => ['required'],
-            'job_number' => ['required','unique:employees'],
+            'job_number' => ['required',Rule::unique('employees')->ignore($request->id_em)],
             'contract_start_date' => ['required'],
             'department_id' => ['required'],
             'section_id' => ['required'],
@@ -198,7 +201,7 @@ class EmployeeController extends Controller
             //'gender' => ['required'],
             //'marital_status' => ['required'],
             'nationality_id' => ['required'],
-            'id_num' => ['required','unique:employees','max:10','min:10'],
+            'id_num' => ['required','max:10','min:10',Rule::unique('employees')->ignore($request->id_em)],
             //'id_issue_date' => ['required'],
             //'id_expire_date' => ['required'],
             //'passport_num' => ['required'],
@@ -242,6 +245,10 @@ class EmployeeController extends Controller
         $em->contract_start_date = $request->contract_start_date;
         $em->save();
 
+        foreach($em->allowances as $is){
+            $is->delete();
+        }
+        
         if($request->allowance_name_ar){
             foreach($request->allowance_name_ar as $index => $a){
 

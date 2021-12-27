@@ -50,7 +50,6 @@
                                         <tr>
                                             <th>{{__('Employee Name')}}</th>
                                             <th>{{__('Job Number')}}</th>
-                                            <th>{{__('Salary')}}</th>
                                             <th>{{__('Total')}}</th>
                                             <th>{{__('Date of contract')}}</th>
                                             <th>{{__('Options')}}</th>
@@ -63,7 +62,6 @@
                                         <tr>
                                             <td><a href="/employee/{{ $employee->id }}">{{ $employee->name }}</a></td>
                                             <td>{{ $employee->job_number }}</td>
-                                            <td>{{ number_format($employee->salary, 2) }}</td>
                                             <td>{{ number_format($employee->payroll_net_salary(), 2) }}</td>
                                             <td>{{ $employee->contract_start_date }}</td>
                                             <td>

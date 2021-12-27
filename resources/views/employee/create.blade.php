@@ -447,6 +447,8 @@
                                                             <div class="col"><input class="form-control em_other_in" data-other="hra_value" type="number" @isset($em) value="{{ $em->hra_percentage }}" @endisset name="hra_percentage" placeholder="{{ __('value as a percentage') }}"></div>
                                                         </div>
                                                     </div><br /><br /><br />
+                                                    
+                                                    
                                                     <div class="col-md-12">
                                                         <div class="row">
                                                             <div class="col"><input class="form-control" type="text" disabled  placeholder="بدل المواصلات"></div>
@@ -455,8 +457,21 @@
                                                             <div class="col"><input class="form-control em_other_in" data-other="trans_value" type="number" @isset($em) value="{{ $em->trans_percentage }}" @endisset name="trans_percentage" placeholder="{{ __('value as a percentage') }}"></div>
                                                         </div>
                                                     </div><br /><br /><br />
+
+
                                                     <div class="allowances_items">
-                                                        
+                                                        @isset($em)
+                                                        @foreach ($em->allowances as $item)
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col"><input class="form-control" type="text" name="allowance_name_ar[]" value="{{ $item->name_ar }}" placeholder="{{ __('Name (AR)') }}"></div>
+                                                                <div class="col"><input class="form-control" type="text" name="allowance_name_en[]" value="{{ $item->name_en }}" placeholder="{{ __('Name (EN)') }}"></div>
+                                                                <div class="col"><input class="form-control" type="text" name="allowance_value[]" value="{{ $item->value }}" placeholder="{{ __('Value in riyals') }}"></div>
+                                                                <div class="col"><input class="form-control" type="text" name="allowance_percentage[]" value="{{ $item->percentage }}" placeholder="{{ __('value as a percentage') }}"></div>
+                                                            </div>
+                                                        </div><br />
+                                                        @endforeach
+                                                        @endisset
                                                     </div>
                                                     
                                                     <br />

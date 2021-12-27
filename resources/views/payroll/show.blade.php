@@ -92,6 +92,7 @@
                                         <tr>
                                             <th>{{__('Job_Number')}}</th>
                                             <th>{{__('Name')}}</th>
+                                            <th>{{__('Contract Start Date')}}</th>
                                             <th>{{__('Basic')}}</th>
                                             <th>{{__('Housing')}}</th>
                                             <th>{{__('Trans')}}</th>
@@ -102,8 +103,8 @@
                                             <th>{{__('Absence')}}</th>
                                             <th>{{__('Violation')}}</th>
                                             <th>{{__('Advanced')}}</th>
+                                            <th>{{__('total deductions')}}</th>
                                             <th>{{__('Net Salary')}}</th>
-                                            <th>{{__('Options')}}</th>
                                         </tr>
                                     </thead>
 
@@ -113,18 +114,19 @@
                                             <tr>
                                                 <td>{{$em->job_number}}</td>
                                                 <td>{{$em->name}}</td>
+                                                <td>{{$em->contract_start_date}}</td>
                                                 <td style="background: #f7f7f7;">{{$em->salary}}</td>
                                                 <td style="background: #f7f7f7;">{{ number_format($em->payroll_hra(),2) }}</td>
                                                 <td style="background: #f7f7f7;">{{ number_format($em->payroll_trans(),2) }}</td>
                                                 <td style="background: #bbffc3;">{{ number_format($em->payroll_allowances(), 2) }}</td>
                                                 
                                                 <td style="background: #bbffc3;">{{ number_format($em->payroll_overtime, 2) }}</td>
-                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_gosi(), 2) }}</td>
+                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_gosi($name = 5) *-1, 2) }}</td>
+                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_absence() * -1,2) }}</td>
                                                 <td> ------ </td>
                                                 <td> ------ </td>
-                                                <td> ------ </td>
+                                                <td style="background: #ffd3d3;"> {{ number_format(($em->payroll_gosi()+$em->payroll_absence())*-1,2) }} </td>
                                                 <td>{{ number_format($em->payroll_net_salary()+$em->payroll_overtime, 2) }}</td>
-                                                <td> ------ </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
