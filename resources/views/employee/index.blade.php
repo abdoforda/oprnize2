@@ -58,7 +58,7 @@
 
 
                                     <tbody>
-                                        @foreach ($employees as $employee)
+                                        @foreach ($employees as $index => $employee)
                                         <tr>
                                             <td><a href="/employee/{{ $employee->id }}">{{ $employee->name }}</a></td>
                                             <td>{{ $employee->job_number }}</td>
