@@ -7,6 +7,7 @@ use App\Deduction;
 use App\Department;
 use App\Job;
 use App\Nationality;
+use App\Payroll;
 use App\Section;
 use App\User;
 use App\Vacation;
@@ -72,7 +73,7 @@ class SettingController extends Controller
         
 
         $request->validate([
-            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances','deductions']),
+            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances','deductions','payrolls']),
         ]);
 
         if($request->table == "departments"){
@@ -101,6 +102,10 @@ class SettingController extends Controller
         
         if($request->table == "deductions"){
             $del = Deduction::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "payrolls"){
+            $del = Payroll::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
         }
         
         $del->delete();
