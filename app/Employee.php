@@ -128,7 +128,6 @@ class Employee extends Model
     }
 
     public function payroll_gosi(){
-        
         if($this->nationality_id == 1){
             return (percentage(10, ($this->salary+$this->payroll_hra()))) * -1;
         }

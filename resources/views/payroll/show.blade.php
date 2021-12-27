@@ -121,7 +121,7 @@
                                                 <td style="background: #bbffc3;">{{ number_format($em->payroll_allowances(), 2) }}</td>
                                                 
                                                 <td style="background: #bbffc3;">{{ number_format($em->payroll_overtime, 2) }}</td>
-                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_gosi($name = 5) *-1, 2) }}</td>
+                                                <td style="background: #ffd3d3;">{{ number_format($em->payroll_gosi() *-1, 2) }}</td>
                                                 <td style="background: #ffd3d3;">{{ number_format($em->payroll_absence() * -1,2) }}</td>
                                                 <td> ------ </td>
                                                 <td> ------ </td>
