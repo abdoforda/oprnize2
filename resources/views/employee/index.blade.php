@@ -66,7 +66,7 @@
                                             <td>{{ $employee->contract_start_date }}</td>
                                             <td>
                                                 <a href="/employee/{{ $employee->id }}/edit"><button type="button" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
-                                                <button type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
+                                                <button onclick="delete_tr(this,'employees','updater{{$index}}',)" data-id="{{ $employee->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Allowance;
 use App\Deduction;
 use App\Department;
+use App\Employee;
 use App\Job;
 use App\Nationality;
 use App\Payroll;
@@ -73,7 +74,7 @@ class SettingController extends Controller
         
 
         $request->validate([
-            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances','deductions','payrolls']),
+            'table'=> Rule::in(['nationalities','departments','sections','jobs','vacations','allowances','deductions','payrolls','employees']),
         ]);
 
         if($request->table == "departments"){
@@ -106,6 +107,10 @@ class SettingController extends Controller
 
         if($request->table == "payrolls"){
             $del = Payroll::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
+        }
+
+        if($request->table == "employees"){
+            $del = Employee::where([['id',$request->id], ['company_id',auth()->user()->company->id]])->first();
         }
         
         $del->delete();
