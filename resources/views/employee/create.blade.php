@@ -99,7 +99,7 @@
                                                         <div class="mb-3">
                                                             <label for="validationCustom03" class="form-label">{{__('Birthdate')}}</label>
                                                             <div class="input-group" id="datepicker3">
-                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->Birthdate }}" @endisset name="Birthdate" placeholder="yyyy-m-dd"
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->Birthdate }}" @endisset name="birthdate" placeholder="yyyy-m-dd"
                                                                     data-date-format="yyyy-m-dd" data-date-container='#datepicker3' data-provide="datepicker"
                                                                     data-date-autoclose="true">
             
