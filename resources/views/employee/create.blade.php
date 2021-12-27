@@ -41,13 +41,11 @@
                             <h6 class="mt-4">Labels</h6>
 
                             <div class="mail-list mt-1">
-
                                     <a href="#"><i class="mdi mdi-star-outline  float-end"></i> {{__('Information')}} </a>
                                     <a href="#"><i class="mdi mdi-star-outline  float-end"></i> Theme Support </a>
                                     <a href="#"><i class="mdi mdi-star-outline  float-end"></i> Theme Support </a>
                                     <a href="#"><i class="mdi mdi-star-outline  float-end"></i> Theme Support </a>
-                            
-                                </div>
+                            </div>
 
                         </div>
                         <!-- End Left sidebar -->
@@ -99,8 +97,14 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="mb-3">
-                                                            <label  class="form-label">{{__('Birthdate')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="birthdate" @isset($em) value="{{ $em->birthdate }}" @endisset required="">
+                                                            <label for="validationCustom03" class="form-label">{{__('Birthdate')}}</label>
+                                                            <div class="input-group" id="datepicker3">
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->Birthdate }}" @endisset name="Birthdate" placeholder="yyyy-m-dd"
+                                                                    data-date-format="yyyy-m-dd" data-date-container='#datepicker3' data-provide="datepicker"
+                                                                    data-date-autoclose="true">
+            
+                                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                            </div><!-- input-group -->
                                                         </div>
                                                     </div>
                                                 </div>

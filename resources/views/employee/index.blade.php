@@ -62,7 +62,7 @@
                                         <tr>
                                             <td><a href="/employee/{{ $employee->id }}">{{ $employee->name }}</a></td>
                                             <td>{{ $employee->job_number }}</td>
-                                            <td>{{ number_format($employee->payroll_net_salary(), 2) }}</td>
+                                            <td>{{ number_format($employee->payroll_net_salary_in_emp(), 2) }}</td>
                                             <td>{{ $employee->contract_start_date }}</td>
                                             <td>
                                                 <a href="/employee/{{ $employee->id }}/edit"><button type="button" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
