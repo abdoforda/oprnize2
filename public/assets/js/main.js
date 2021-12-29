@@ -103,8 +103,8 @@ function errors(json){
         console.log(key);
         console.log(json[key][0]);
 		
-		if($("input[name='"+key+"']").data("provide")=="datepicker"){
-			$("input[name='"+key+"']").closest(".input-group").find("span").after(`<div class="invalid-feedback" style="display: block;">${json[key][0]}</div>`);;
+		if($("input[name='"+key+"']").data("provide")=="datepicker" || $("input[name='"+key+"']").data("dd")=="dater"){
+			$("input[name='"+key+"']").closest(".input-group").find("span").after(`<div class="invalid-feedback" style="display: block;">${json[key][0]}</div>`);
 		}else{
 			$("input[name='"+key+"']").addClass("is-invalid").after(`<div class="invalid-feedback" style="display: block;">${json[key][0]}</div>`);	
 		}

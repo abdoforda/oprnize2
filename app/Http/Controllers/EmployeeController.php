@@ -7,7 +7,9 @@ use App\Department;
 use App\Employee;
 use App\Nationality;
 use App\Section;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
@@ -53,7 +55,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name_ar' => ['required'],
             'name_en' => ['required'],
-            'job_number' => ['required','unique:employees'],
+            
             'contract_start_date' => ['required'],
             'department_id' => ['required'],
             'section_id' => ['required'],
@@ -61,18 +63,24 @@ class EmployeeController extends Controller
             'salary' => ['required'],
             'birthdate' => ['required'],
 
-            //'gender' => ['required'],
-            //'marital_status' => ['required'],
+            'gender' => ['required'],
+            'marital_status' => ['required'],
             'nationality_id' => ['required'],
+            'contract_end_date' => ['required'],
+            'annual_balance' => ['required'],
             'id_num' => ['required','unique:employees','max:10','min:10'],
+            'job_number' => ['required','unique:employees'],
+            'phone' => ['required','unique:employees'],
+            'email' => ['required','unique:employees'],
             //'id_issue_date' => ['required'],
             //'id_expire_date' => ['required'],
             //'passport_num' => ['required'],
             //'passport_issue_date' => ['required'],
             //'passport_expire_date' => ['required'],
-            //'phone' => ['required'],
-            //'email' => ['required'],
-            //'password' => ['required'],
+            //'contract_type' => ['required'],
+            //'employment_type' => ['required'],
+            'password' => ['required','confirmed'],
+            'password_confirmation' => ['required'],
 
         ]);
         
@@ -81,7 +89,11 @@ class EmployeeController extends Controller
         $em->company_id = auth()->user()->company->id;
 
         $em->birthdate = $request->birthdate;
+        $em->contract_end_date = $request->contract_end_date;
+        $em->contract_type = $request->contract_type;
+        $em->employment_type = $request->employment_type;
         $em->gender = $request->gender;
+        $em->annual_balance = $request->annual_balance;
         $em->marital_status = $request->marital_status;
         $em->nationality_id = $request->nationality_id;
         $em->id_num = $request->id_num;
@@ -136,7 +148,15 @@ class EmployeeController extends Controller
     
             }
         }
-        
+
+        $user = new User();
+        $user->name = "User";
+        $user->domain = auth()->user()->company->domain;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->type = "employee";
+        $user->employee_id = $em->id;
+        $user->save();
 
         return $em;
         
@@ -190,26 +210,30 @@ class EmployeeController extends Controller
             'id_em' => ['required'],
             'name_ar' => ['required'],
             'name_en' => ['required'],
-            'job_number' => ['required',Rule::unique('employees')->ignore($request->id_em)],
             'contract_start_date' => ['required'],
             'department_id' => ['required'],
             'section_id' => ['required'],
             'job_id' => ['required'],
             'salary' => ['required'],
             'birthdate' => ['required'],
-
-            //'gender' => ['required'],
-            //'marital_status' => ['required'],
+            'gender' => ['required'],
+            'marital_status' => ['required'],
             'nationality_id' => ['required'],
-            'id_num' => ['required','max:10','min:10',Rule::unique('employees')->ignore($request->id_em)],
+            'contract_end_date' => ['required'],
+            'annual_balance' => ['required'],
+            'id_num' => ['required',Rule::unique('employees')->ignore($request->id_em),'max:10','min:10'],
+            'job_number' => ['required',Rule::unique('employees')->ignore($request->id_em)],
+            'phone' => ['required',Rule::unique('employees')->ignore($request->id_em)],
+            'email' => ['required',Rule::unique('employees')->ignore($request->id_em)],
             //'id_issue_date' => ['required'],
             //'id_expire_date' => ['required'],
             //'passport_num' => ['required'],
             //'passport_issue_date' => ['required'],
             //'passport_expire_date' => ['required'],
-            //'phone' => ['required'],
-            //'email' => ['required'],
-            //'password' => ['required'],
+            //'contract_type' => ['required'],
+            //'employment_type' => ['required'],
+            'password' => ['required','confirmed'],
+            'password_confirmation' => ['required'],
 
         ]);
         
@@ -218,8 +242,12 @@ class EmployeeController extends Controller
 
         $em->company_id = auth()->user()->company->id;
 
-        $em->gender = $request->gender;
         $em->birthdate = $request->birthdate;
+        $em->contract_end_date = $request->contract_end_date;
+        $em->contract_type = $request->contract_type;
+        $em->employment_type = $request->employment_type;
+        $em->gender = $request->gender;
+        $em->annual_balance = $request->annual_balance;
         $em->marital_status = $request->marital_status;
         $em->nationality_id = $request->nationality_id;
         $em->id_num = $request->id_num;
@@ -248,7 +276,7 @@ class EmployeeController extends Controller
         foreach($em->allowances as $is){
             $is->delete();
         }
-        
+
         if($request->allowance_name_ar){
             foreach($request->allowance_name_ar as $index => $a){
 

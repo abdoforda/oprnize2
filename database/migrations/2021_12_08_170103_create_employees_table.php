@@ -43,7 +43,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('contract_period')->nullable();
             $table->string('phone')->nullable(); // end
             $table->integer('annual_balance')->default(21);
-            $table->decimal('available_balance')->default(0);
+            $table->decimal('available_balance')->nullable();
             $table->string('email')->nullable(); // end
             $table->decimal('salary')->default(0);
             $table->decimal('hra_value')->nullable();

@@ -255,6 +255,13 @@ dir="ltr"
                         </li>
 
                         <li>
+                            <a href="/request/create" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                <span>{{__('Create order')}}</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-toggles"></i>
                                 <span>{{ __('Settings') }}</span>

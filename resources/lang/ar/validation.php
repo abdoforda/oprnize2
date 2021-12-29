@@ -155,5 +155,12 @@ return [
         'salary'             => 'الراتب الأساسي',
         'nationality_id'             => 'الجنسية',
         'birthdate'             => 'تاريخ الميلاد',
+        'phone'             => 'رقم الجوال',
+        'email'             => 'البريد الإلكتروني',
+        'password'             => 'كلمة المرور',
+        'password_confirmation'             => 'تأكيد كلمة المرور',
+        'id_num'             => 'رقم الهوية',
+        'annual_balance'             => 'الرصيد السنوي',
+        'contract_end_date'             => 'تاريخ نهاية الخدمة',
     ],
 ];

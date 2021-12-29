@@ -156,6 +156,7 @@
     "Edit":"تعديل",
     "Delete":"حذف",
     "Information":"معلومات الموظف",
+    "Info":"معلومات",
     "Personal Data":"بيانات شخصية",
     "Basic":"Basic",
     "Housing":"Housing",
@@ -168,7 +169,29 @@
     "Net Salary":"Net Salary",
     "Job_Number":"J.N",
     "total deductions":"إجمالي الخصومات",
-    "You welcome in":"مرحبا بك في"
+    "You welcome in":"مرحبا بك في",
+    "Create order":"إنشاء طلب",
+    "Holiday start and end date":"تاريخ بداية ونهاية الأجازة",
+    "Pay in advance":"الدفع المسبق",
+    "Start Date":"تاريخ البدء",
+    "End Date":"تاريخ الانتهاء",
+    "Ticket":"طلب تذكرة",
+    "Your request has been sent":"تم إرسال طلبك",
+    "The number of days":"عدد الايام",
+    "Current Balance":"الرصيد الحالي",
+    "the kind of holiday":"نوع الاجازة",
+    "Yes":"نعم",
+    "Requests":"الطلبات",
+    "You can add and edit Requests from this page":"يمكنك مشاهدة وإضافة الطلبات من خلال هذه الصفحة",
+    "New Request":"طلب جديد",
+    "No":"لا",
+    "Sent":"إرسال",
+    "To":"إلي",
+    "Visa":"طلب فيزا",
+    "Pay with payroll":"الدفع مع الراتب",
+    "Sorry, as the founder of the company, you do not have the right to request a vacation":"عفوا انت ك مؤسس الشركة ليس لك الحق في طلب اجازة",
+    "Choose one of these requests and complete the rest of the procedures":"اختر احد الطلبات هذه وأكمل باقي الاجراءات",
+    "Request":"الطلبات"
     
 }
 

@@ -21,10 +21,23 @@ class Employee extends Model
         static::addGlobalScope(new CompanyScope());
     }
 
+
+    public function requests()
+    {
+        return $this->hasMany(Myrequest::class);
+    }
+    
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+    
+
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
+    
 
     public static function search_from_job_number($job_number){
         $em = Employee::query()
@@ -157,12 +170,27 @@ class Employee extends Model
 
     public function payroll_net_salary(){
         return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->total_deductions());
-        }
+    }
 
         public function payroll_net_salary_in_emp(){
             return ($this->salary+$this->payroll_hra()+$this->payroll_trans()+$this->payroll_allowances()+$this->payroll_gosi());
+    }
+
+    public function current_balance(){
+
+        if($this->available_balance == NULL){
+            $date = Carbon::parse($this->contract_start_date);
+            $now  = Carbon::now();
+            $diff = $date->diffInDays($now);
+            return ($diff * ($this->annual_balance / 365));
         }
 
+        $date = Carbon::parse($this->created_at);
+        $now  = Carbon::now();
+        $diff = $date->diffInDays($now);
+        return ($diff * ($this->annual_balance / 365)) + $this->available_balance;
+
+    }
 
 
 }

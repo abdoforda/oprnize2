@@ -359,17 +359,17 @@
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Part time') }}</span>
-                                                                    <input type="radio" class="hide" name="gender" value="part_time">
+                                                                    <input type="radio" class="hide" name="employment_type" value="part_time">
                                                                 </label>
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Seasonal') }}</span>
-                                                                    <input type="radio" class="hide" name="gender" value="seasonal">
+                                                                    <input type="radio" class="hide" name="employment_type" value="seasonal">
                                                                 </label>
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>{{ __('Temporary') }}</span>
-                                                                    <input type="radio" class="hide" name="gender" value="temporary">
+                                                                    <input type="radio" class="hide" name="employment_type" value="temporary">
                                                                 </label>
                                                             </div>
                                                         </div>

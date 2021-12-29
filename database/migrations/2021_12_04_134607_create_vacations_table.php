@@ -21,13 +21,11 @@ class CreateVacationsTable extends Migration
             $table->integer('min');
             $table->integer('max');
             $table->set('type',['male','female','all'])->default('all');
+            $table->string('type2')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
-
-
-
-
+        
     }
 
     /**
