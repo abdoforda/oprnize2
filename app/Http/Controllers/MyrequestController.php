@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Myrequest;
 use App\Myvacation;
 use App\Vacation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +19,7 @@ class MyrequestController extends Controller
     public function index()
     {
         $nationalities = auth()->user()->employee->requests;
-        
+
         return view('request.index', compact(['nationalities']));
     }
 
@@ -63,12 +64,28 @@ class MyrequestController extends Controller
             $start = date("Y-m-d", strtotime($request->start));
             $end = date("Y-m-d", strtotime($request->end));
 
+
             $vacation = Vacation::findOrFail($request->vacation_id);
             if($vacation){
                 if($vacation->type2 == "annual"){
                     $request->validate([
                         'pay_in_advance'=> ['required',Rule::in(['pay_with_payroll','pay_in_advance'])],
                     ]);
+                }
+
+
+                $date = Carbon::parse($start);
+                $now = Carbon::parse($end);
+                $diff = $date->diffInDays($now)+1;
+
+                if($diff > auth()->user()->employee->current_balance()){
+                    return __('Your balance is not enough to request a vacation');
+                }
+
+                if($vacation->min == 0 and $vacation->max == 0){}else{
+                    if($diff >= $vacation->min and $diff <= $vacation->max){}else{
+                        return __('The number of vacation days should not be less than')." ".$vacation->min." ".__('and not more than')." ".$vacation->max;
+                    }
                 }
 
 

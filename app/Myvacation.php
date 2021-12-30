@@ -17,4 +17,8 @@ class Myvacation extends Model
         $now  = Carbon::parse($this->end);
         return $date->diffInDays($now)+1;
     }
+
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
 }

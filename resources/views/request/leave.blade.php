@@ -150,7 +150,7 @@
                         Success("{{ __('Your request has been sent') }}");
                         window.location.href = "/request";
                     }else if(data.status == 200){
-                        toast_message("asd",'ddd','ok');
+                        toast_message("",data.responseText,"{{ __('Ok') }}");
                     }
                     
                 }

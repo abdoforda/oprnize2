@@ -48,6 +48,8 @@
                                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
+                                            <th>{{__('Job_Number')}}</th>
+                                            <th>{{__('Employee')}}</th>
                                             <th>{{__('the kind of holiday')}}</th>
                                             <th>{{__('The number of days')}}</th>
                                             <th>{{__('Date')}}</th>
@@ -60,7 +62,10 @@
                                     <tbody>
                                         @foreach ($nationalities as $index => $item)
                                         <tr id="updater{{$index}}">
-                                            <td><a href="/request/{{ $item->id }}">{{ $item->myvacation->vacation->name }}</a></td>
+                                            
+                                            <td>{{ $item->myvacation->employee->job_number }}</td>
+                                            <td><a href="/employee/{{ $item->myvacation->employee->id }}/edit">{{ $item->myvacation->employee->name }}</a></td>
+                                            <td>{{ $item->myvacation->vacation->name }}</td>
                                             <td>{{ $item->myvacation->the_number_of_days() }}</td>
                                             <td style="text-align: center;">{{ $item->myvacation->start }} <br /> {{ __('To') }} <br /> {{ $item->myvacation->end }}</td>
                                             <td>{{ $item->myvacation->visa }} <br/> {{ $item->myvacation->ticket }} <br/> {{ $item->myvacation->pay_in_advance }}</td>
