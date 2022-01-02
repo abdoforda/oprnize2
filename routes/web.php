@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Middleware\CheckSettings;
-use App\Http\Middleware\SubDomainCheck;
 use App\User;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +39,8 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
             return redirect('/setting');
         });
 
-        
+        Route::get('/logout', 'SettingController@logout');
+        Route::get('/permission', 'SettingController@permission');
 
         Route::get('/delete_tr', 'SettingController@delete_tr');
         Route::get('/setting', 'SettingController@edit');

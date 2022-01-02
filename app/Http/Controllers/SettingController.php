@@ -13,8 +13,10 @@ use App\Section;
 use App\User;
 use App\Vacation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Permission;
 
 class SettingController extends Controller
 {
@@ -69,6 +71,35 @@ class SettingController extends Controller
 
         return "success";
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
+    }
+
+    public function permission(){
+
+        $user = User::find(2);
+
+        $user->syncPermissions(['add employee', 'edit employee']);
+
+        //Permission::create(['name' => 'add employee']);
+        //Permission::create(['name' => 'edit employee']);
+        //Permission::create(['name' => 'delete employee']);
+        //Permission::create(['name' => 'add vacation']);
+        //Permission::create(['name' => 'edit vacation']);
+        //Permission::create(['name' => 'delete vacation']);
+        //Permission::create(['name' => 'add discount']);
+        //Permission::create(['name' => 'delete discount']);
+        //Permission::create(['name' => 'add overtime']);
+        //Permission::create(['name' => 'delete overtime']);
+        //Permission::create(['name' => 'add payroll']);
+        //Permission::create(['name' => 'delete payroll']);
+        //Permission::create(['name' => 'settings']);
+
+    }
+
+
 
     public function delete_tr(Request $request){
         

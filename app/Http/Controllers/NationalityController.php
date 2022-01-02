@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Nationality;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class NationalityController extends Controller
 {
@@ -14,6 +15,11 @@ class NationalityController extends Controller
      */
     public function index()
     {
+
+        $permission = Permission::create(['name' => 'edit articles']);
+        $user = auth()->user();
+        //$user->givePermissionTo('edit articles');
+        
         $nationalities = Nationality::where('company_id', auth()->user()->company->id)
         ->orderBy('id','DESC')
         ->get();

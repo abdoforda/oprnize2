@@ -160,7 +160,7 @@ dir="ltr"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-7.jpg') }}"
                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">James</span>
+                            <span class="d-none d-xl-inline-block ms-1">{{ auth()->user()->name }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -177,8 +177,8 @@ dir="ltr"
                                     class="mdi mdi-lock-open-outline font-size-16 align-middle me-1"></i> Lock
                                 screen</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i
-                                    class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                            <a class="dropdown-item text-danger" href="/logout"><i
+                                    class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> {{ __('Logout') }}</a>
                         </div>
                     </div>
 
@@ -199,7 +199,7 @@ dir="ltr"
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">James Raphael</h5>
+                            <h5 class="mt-3 font-size-16 text-white">{{ auth()->user()->name }}</h5>
                             <span class="font-size-13 text-white-50">Administrator</span>
                         </div>
                     </div>
@@ -221,46 +221,61 @@ dir="ltr"
                             </a>
                         </li>
 
+                        @canany(['add employee','edit employee','delete employee'])
                         <li>
                             <a href="/employee" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Employees')}}</span>
                             </a>
                         </li>
+                        @endcan
+                        
 
 
                         
-
+                        @canany(['add vacation','edit vacation','delete vacation'])
                         <li>
                             <a href="/vacation" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Leave Types')}}</span>
                             </a>
                         </li>
-
+                        @endcan
                         
 
+                        @canany(['add discount','delete discount','add overtime','delete overtime'])
                         <li>
                             <a href="/deduction" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Deductions')}}</span>
                             </a>
                         </li>
-
+                        @endcan
+                        
+                        @canany(['add payroll','delete payroll'])
                         <li>
                             <a href="/payroll" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Payroll manager')}}</span>
                             </a>
                         </li>
+                        @endcan
 
+
+                        
+                        @if (!auth()->user()->is_admin())
                         <li>
                             <a href="/request/create" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
                                 <span>{{__('Create order')}}</span>
                             </a>
                         </li>
+                        @endif
+                        
 
+
+                        
+                        @canany(['settings'])
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="dripicons-toggles"></i>
@@ -279,7 +294,7 @@ dir="ltr"
                                 
                             </ul>
                         </li>
-
+                        @endcan
 
                     </ul>
                 </div>

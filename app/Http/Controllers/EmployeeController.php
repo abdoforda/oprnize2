@@ -14,6 +14,13 @@ use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('DeSeJo');
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -156,6 +163,7 @@ class EmployeeController extends Controller
         $user->password = Hash::make($request->password);
         $user->type = "employee";
         $user->employee_id = $em->id;
+        $user->company_id = auth()->user()->company->id;
         $user->save();
 
         return $em;

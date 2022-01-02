@@ -113,6 +113,9 @@ class RegisterController extends Controller
 
         $user->company_id = $company->id;
         $user->save();
+
+        
+
         
         $data2 = [
             ['company_id'=>$company->id, 'name_en'=> 'Preliminary sick leave','name_ar'=> 'اجازة مرضية أولي','min'=> 1,'max'=> 30,'type'=> 'all'],

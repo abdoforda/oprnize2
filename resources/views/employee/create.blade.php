@@ -109,6 +109,61 @@
                                                     </div>
                                                 </div>
 
+
+                                                <br />
+                                                <div class="row">
+                                                    <h4 class="header-title">{{__('Personal Data')}}</h4>
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom01" class="form-label">{{__('Identification Number')}}</label>
+                                                            <input type="text" class="form-control euhgiuerhgerg" id="validationCustom01" @isset($em) value="{{ $em->id_num }}" @endisset name="id_num" required="">
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom02" class="form-label">{{__('Release date')}}</label>
+                                                            <div class="input-group" id="datepicker2">
+                                                                <input type="text" class="form-control" name="id_issue_date" @isset($em) value="{{ $em->id_issue_date }}" @endisset placeholder="yyyy-m-dd"
+                                                                    data-date-format="yyyy-m-dd" data-date-container='#datepicker2' data-provide="datepicker"
+                                                                    data-date-autoclose="true">
+            
+                                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                            </div><!-- input-group -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
+                                                            <div class="input-group" id="datepicker3">
+                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->id_expire_date }}" @endisset name="id_expire_date" placeholder="yyyy-m-dd"
+                                                                    data-date-format="yyyy-m-dd" data-date-container='#datepicker3' data-provide="datepicker"
+                                                                    data-date-autoclose="true">
+            
+                                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                            </div><!-- input-group -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <br />
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label for="validationCustom01" class="form-label">{{__('Nationality')}}</label>
+                                                        <div class="row checkbox2" style="display: flex;">
+                                                        </div>
+                                                        <div class="row choosse-input country02" @isset($em) data-select="{{ $em->nationality_id }}" @endisset>
+                                                            @include('componentes.nationalitys', ['type'=>2])
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <br />
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
@@ -148,55 +203,10 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="validationCustom01" class="form-label">{{__('Nationality')}}</label>
-                                                        <div class="row checkbox2" style="display: flex;">
-                                                        </div>
-                                                        <div class="row choosse-input country02" @isset($em) data-select="{{ $em->nationality_id }}" @endisset>
-                                                            @include('componentes.nationalitys', ['type'=>2])
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                                 
                                                 
-                                                <br />
-                                                <div class="row">
-                                                    <h4 class="header-title">{{__('Personal Data')}}</h4>
-                                                    <div class="col-md-4">
-                                                        <div class="mb-3">
-                                                            <label for="validationCustom01" class="form-label">{{__('Identification Number')}}</label>
-                                                            <input type="text" class="form-control euhgiuerhgerg" id="validationCustom01" @isset($em) value="{{ $em->id_num }}" @endisset name="id_num" required="">
-                                                            <div class="valid-feedback">
-                                                                Looks good!
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="mb-3">
-                                                            <label for="validationCustom02" class="form-label">{{__('Release date')}}</label>
-                                                            <div class="input-group" id="datepicker2">
-                                                                <input type="text" class="form-control" name="id_issue_date" @isset($em) value="{{ $em->id_issue_date }}" @endisset placeholder="yyyy-m-dd"
-                                                                    data-date-format="yyyy-m-dd" data-date-container='#datepicker2' data-provide="datepicker"
-                                                                    data-date-autoclose="true">
-            
-                                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                                                            </div><!-- input-group -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="mb-3">
-                                                            <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
-                                                            <div class="input-group" id="datepicker3">
-                                                                <input type="text" class="form-control" @isset($em) value="{{ $em->id_expire_date }}" @endisset name="id_expire_date" placeholder="yyyy-m-dd"
-                                                                    data-date-format="yyyy-m-dd" data-date-container='#datepicker3' data-provide="datepicker"
-                                                                    data-date-autoclose="true">
-            
-                                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                                                            </div><!-- input-group -->
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
 
 
                                                 <br />
@@ -244,13 +254,13 @@
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Mobile number')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="phone" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->phone }}" @endisset name="phone" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Email')}}</label>
-                                                            <input type="text" class="form-control" id="validationCustom01" name="email" required="">
+                                                            <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->email }}" @endisset name="email" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -412,7 +422,7 @@
                                                     <h4 class="header-title">{{__('Annual balance')}}</h4>
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
-                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->id_num }}" @endisset >
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->annual_balance }}" @endisset >
                                                                 <label class="choosse">
                                                                     <i class="fas fa-check-circle"></i>
                                                                     <span>21</span>

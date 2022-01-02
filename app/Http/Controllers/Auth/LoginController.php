@@ -44,7 +44,6 @@ class LoginController extends Controller
 
     public function login(Request $request){
 
-
         $host = $request->getHttpHost();
         $ex = explode('.',$host);
         $domain = $ex[0];
@@ -60,6 +59,29 @@ class LoginController extends Controller
                 Auth::logout();
                 return __('There is a problem with the email or password');
             }
+
+            $user = auth()->user();
+            if($user->id == auth()->user()->company->user_id){
+                
+                $user->syncPermissions([
+                    'add employee',
+                    'edit employee',
+                    'delete employee',
+                    'add vacation',
+                    'edit vacation',
+                    'delete vacation',
+                    'add discount',
+                    'delete discount',
+                    'add overtime',
+                    'delete overtime',
+                    'add payroll',
+                    'delete payroll',
+                    'settings'
+                ]);
+
+            }
+            
+
             return "success";
         }
 
