@@ -93,6 +93,7 @@
                                             <th>{{__('Job_Number')}}</th>
                                             <th>{{__('Name')}}</th>
                                             <th>{{__('Contract Start Date')}}</th>
+                                            <th>{{__('Working Days')}}</th>
                                             <th>{{__('Basic')}}</th>
                                             <th>{{__('Housing')}}</th>
                                             <th>{{__('Trans')}}</th>
@@ -115,6 +116,7 @@
                                                 <td>{{$em->job_number}}</td>
                                                 <td>{{$em->name}}</td>
                                                 <td>{{$em->contract_start_date}}</td>
+                                                <td>{{$em->working_days}}</td>
                                                 <td style="background: #f7f7f7;">{{$em->salary}}</td>
                                                 <td style="background: #f7f7f7;">{{ number_format($em->payroll_hra(),2) }}</td>
                                                 <td style="background: #f7f7f7;">{{ number_format($em->payroll_trans(),2) }}</td>

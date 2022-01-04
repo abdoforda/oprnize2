@@ -52,6 +52,7 @@
                                             <th>{{__('Job Number')}}</th>
                                             <th>{{__('Total')}}</th>
                                             <th>{{__('Date of contract')}}</th>
+                                            <th>{{__('Current Balance')}}</th>
                                             <th>{{__('Options')}}</th>
                                         </tr>
                                     </thead>
@@ -64,9 +65,12 @@
                                             <td>{{ $employee->job_number }}</td>
                                             <td>{{ number_format($employee->payroll_net_salary_in_emp(), 2) }}</td>
                                             <td>{{ $employee->contract_start_date }}</td>
+                                            <td>{{ $employee->current_balance() }}</td>
                                             <td>
                                                 <a href="/employee/{{ $employee->id }}/edit"><button type="button" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
+                                                <a href="/permission/{{ $employee->id }}"><button type="button" class="btn btn-warning btn-sm waves-effect waves-light"><i class="fas fa-address-card"></i> {{__('Permission')}}</button></a>
                                                 <button onclick="delete_tr(this,'employees','updater{{$index}}',)" data-id="{{ $employee->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
+                                                
                                             </td>
                                         </tr>
                                         @endforeach

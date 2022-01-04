@@ -263,6 +263,10 @@
                                                             <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->email }}" @endisset name="email" required="">
                                                         </div>
                                                     </div>
+
+                                                    @isset($em)
+
+                                                    @else
                                                     <div class="col-md-6">
                                                         <div class="mb-3">
                                                             <label for="validationCustom01" class="form-label">{{__('Password')}}</label>
@@ -275,6 +279,11 @@
                                                             <input type="password" class="form-control" id="validationCustom01" name="password_confirmation" required="">
                                                         </div>
                                                     </div>
+                                                    @endisset
+
+                                                    
+
+
                                                 </div>
 
                                                 <br />
@@ -448,7 +457,20 @@
                                                             <input type="text" class="form-control" id="validationCustom01" @isset($em) value="{{ $em->salary }}" @endisset name="salary" required="">
                                                         </div>
                                                     </div>
+
+                                                    @isset($em)
+                                                    @else
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom101" class="form-label">{{__('Initial Balance')}}</label>
+                                                            <input type="number" class="form-control" id="validationCustom101" name="available_balance" >
+                                                        </div>
+                                                    </div>
+                                                @endisset
+                                                
                                                 </div>
+
+                                                
 
                                                 <br />
                                                 <div class="row" style="padding: 4px; background: #f5f5f5; border-radius: 8px">

@@ -96,6 +96,7 @@ class EmployeeController extends Controller
         $em->company_id = auth()->user()->company->id;
 
         $em->birthdate = $request->birthdate;
+        $em->available_balance = $request->available_balance;
         $em->contract_end_date = $request->contract_end_date;
         $em->contract_type = $request->contract_type;
         $em->employment_type = $request->employment_type;

@@ -77,10 +77,14 @@ class SettingController extends Controller
         return redirect('/login');
     }
 
-    public function permission(){
+    public function permission(Request $request){
+
+        $employee = Employee::findOrFail($request->employee);
+
+
+        return view('permission.edit', compact('employee'));
 
         $user = User::find(2);
-
         $user->syncPermissions(['add employee', 'edit employee']);
 
         //Permission::create(['name' => 'add employee']);
@@ -97,6 +101,14 @@ class SettingController extends Controller
         //Permission::create(['name' => 'delete payroll']);
         //Permission::create(['name' => 'settings']);
 
+    }
+
+    public function update_permasstion(Request $request){
+
+        $employee = Employee::findOrFail($request->employee_id);
+        $employee->user->syncPermissions($request->permissions);
+        return $request->toArray();
+        
     }
 
 

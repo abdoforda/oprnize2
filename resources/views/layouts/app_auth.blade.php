@@ -292,6 +292,7 @@ dir="ltr"
                                 <li><a href="/setting">{{ __('General Settings') }}</a></li>
                                 <li><a href="/allowance">{{ __('Allowances') }}</a></li>
                                 
+                                
                             </ul>
                         </li>
                         @endcan

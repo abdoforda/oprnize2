@@ -40,7 +40,8 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         });
 
         Route::get('/logout', 'SettingController@logout');
-        Route::get('/permission', 'SettingController@permission');
+        Route::get('/permission/{employee}', 'SettingController@permission');
+        Route::post('/update_permasstion', 'SettingController@update_permasstion');
 
         Route::get('/delete_tr', 'SettingController@delete_tr');
         Route::get('/setting', 'SettingController@edit');
