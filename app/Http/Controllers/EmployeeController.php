@@ -241,8 +241,6 @@ class EmployeeController extends Controller
             //'passport_expire_date' => ['required'],
             //'contract_type' => ['required'],
             //'employment_type' => ['required'],
-            'password' => ['required','confirmed'],
-            'password_confirmation' => ['required'],
 
         ]);
         
