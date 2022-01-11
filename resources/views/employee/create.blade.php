@@ -146,11 +146,20 @@
                                                             </div><!-- input-group -->
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control hijri-date-default" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 
                                                 <br />
                                                 
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <label for="validationCustom01" class="form-label">{{__('Nationality')}}</label>
@@ -286,6 +295,27 @@
 
                                                 </div>
 
+                                                <br />
+                                                <div class="row">
+                                                    <h4 class="header-title">{{__('Workshift')}}</h4>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">{{__('Workshift')}}</label>
+                                                            <div class="row choosse-input" @isset($em) data-select="{{ $em->workshift_id }}" @endisset>
+
+                                                                @foreach ($company->workshifts as $department)
+                                                                    <label class="choosse">
+                                                                        <i class="fas fa-check-circle"></i>
+                                                                        <span>{{ $department->name }}</span>
+                                                                        <input type="radio" class="hide" name="workshift_id" value="{{ $department->id }}">
+                                                                    </label>
+                                                                @endforeach
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <br />
                                                 <div class="row">
                                                     <h4 class="header-title">{{__('Job data')}}</h4>
@@ -662,5 +692,61 @@
             }
             return model.name_en;
         }
+
+        
+
     </script>
+
+
+<script type="text/javascript">
+
+
+    $(function () {
+
+         initHijrDatePicker();
+
+         initHijrDatePickerDefault();
+
+         $('.disable-date').hijriDatePicker({
+
+             minDate:"2020-01-01",
+             maxDate:"2021-01-01",
+             viewMode:"years",
+             hijri:true,
+             debug:true
+         });
+
+     });
+
+     function initHijrDatePicker() {
+
+         $(".hijri-date-input").hijriDatePicker({
+             locale: "ar-sa",
+             format: "DD-MM-YYYY",
+             hijriFormat:"iYYYY-iMM-iDD",
+             dayViewHeaderFormat: "MMMM YYYY",
+             hijriDayViewHeaderFormat: "iMMMM iYYYY",
+             showSwitcher: true,
+             allowInputToggle: true,
+             showTodayButton: false,
+             useCurrent: true,
+             isRTL: false,
+             viewMode:'months',
+             keepOpen: false,
+             hijri: false,
+             debug: true,
+             showClear: true,
+             showTodayButton: true,
+             showClose: true
+         });
+     }
+
+     function initHijrDatePickerDefault() {
+
+         $(".hijri-date-default").hijriDatePicker();
+     }
+
+ </script>
+
+ 
 @endsection

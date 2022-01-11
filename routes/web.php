@@ -80,7 +80,17 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
 
         //request
         Route::resource('/request', 'MyrequestController');
+        Route::get('/request_employees', 'MyrequestController@requestemployees');
+        Route::get('/update_request', 'MyrequestController@update_request');
+        Route::resource('/approvalstaff', 'ApprovalstaffController');
+        Route::get('/approval_staff_update', 'ApprovalstaffController@approval_staff_update');
         Route::get('/view', 'MyrequestController@view');
+
+        //work shift
+        Route::resource('/workshift', 'WorkshiftController');
+        Route::resource('/attendances', 'AttendanceController');
+        Route::get('/update_attendances', 'AttendanceController@update_attendances');
+
         
 
     }); 

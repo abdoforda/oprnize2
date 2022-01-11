@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Approvalstaff;
 use App\Myrequest;
 use App\Myvacation;
 use App\Vacation;
@@ -19,8 +20,47 @@ class MyrequestController extends Controller
     public function index()
     {
         $nationalities = auth()->user()->employee->requests;
-
         return view('request.index', compact(['nationalities']));
+
+    }
+
+    public function requestemployees(){
+        $nationalities = auth()->user()->employee->requests_employees;
+        return view('request.requestemployees', compact(['nationalities']));
+    }
+
+    public function update_request(Request $request){
+        
+        $req = Myrequest::find($request->id);
+        if($req->show_employee == auth()->user()->employee->id){
+
+            $last = auth()->user()->company->approvalstaffs->last();
+
+            if($request->status == "cancel"){
+                $req->status = 'reject';
+                $req->save();
+                return "ok";
+            }
+
+            if($last->employee_id == auth()->user()->employee->id){
+                $req->status = 'success';
+                $req->save();
+                return "ok";
+            }
+
+            $em_app = auth()->user()->employee->approvalstaff;
+            $next = Approvalstaff::where([
+                ['id', '>', $em_app->id],
+                ['company_id', auth()->user()->company->id],
+            ])->min('id');
+
+            $next = Approvalstaff::find($next);
+
+            $req->show_employee = $next->employee_id;
+            $req->save();
+            return "ok";
+
+        }
     }
 
     public function view(Request $request){
@@ -91,6 +131,8 @@ class MyrequestController extends Controller
 
                 // insert request vacation
 
+                
+
                 $company_id = auth()->user()->company->id;
                 $myvacation = new Myvacation();
                 $myvacation->company_id = $company_id;
@@ -108,6 +150,7 @@ class MyrequestController extends Controller
                 $myrequest->employee_id = auth()->user()->employee->id;
                 $myrequest->type = "leave";
                 $myrequest->model_id = $myvacation->id;
+                $myrequest->show_employee = auth()->user()->company->approvalstaffs->first()->employee_id;
                 $myrequest->save();
 
                 return $myrequest;

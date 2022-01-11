@@ -72,6 +72,7 @@ class EmployeeController extends Controller
 
             'gender' => ['required'],
             'marital_status' => ['required'],
+            'workshift_id' => ['required'],
             'nationality_id' => ['required'],
             'contract_end_date' => ['required'],
             'annual_balance' => ['required'],
@@ -105,6 +106,7 @@ class EmployeeController extends Controller
         $em->marital_status = $request->marital_status;
         $em->nationality_id = $request->nationality_id;
         $em->id_num = $request->id_num;
+        $em->workshift_id = $request->workshift_id;
         $em->id_issue_date = $request->id_issue_date;
         $em->id_expire_date = $request->id_expire_date;
         $em->passport_num = $request->passport_num;
@@ -225,6 +227,7 @@ class EmployeeController extends Controller
             'job_id' => ['required'],
             'salary' => ['required'],
             'birthdate' => ['required'],
+            'workshift_id' => ['required'],
             'gender' => ['required'],
             'marital_status' => ['required'],
             'nationality_id' => ['required'],
@@ -255,6 +258,7 @@ class EmployeeController extends Controller
         $em->employment_type = $request->employment_type;
         $em->gender = $request->gender;
         $em->annual_balance = $request->annual_balance;
+        $em->workshift_id = $request->workshift_id;
         $em->marital_status = $request->marital_status;
         $em->nationality_id = $request->nationality_id;
         $em->id_num = $request->id_num;

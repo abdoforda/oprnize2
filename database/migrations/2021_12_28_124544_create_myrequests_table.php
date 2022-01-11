@@ -20,6 +20,7 @@ class CreateMyrequestsTable extends Migration
             $table->set('type',['leave','overtime']);
             $table->integer('model_id');
             $table->string('status')->default('pending');
+            $table->integer('show_employee')->nullable();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->foreignId('department_id')->nullable()->constrained()->onDelete('cascade'); // end
             $table->foreignId('section_id')->nullable()->constrained()->onDelete('cascade'); // end
             $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade'); // end
+            $table->foreignId('workshift_id')->nullable()->constrained()->onDelete('cascade'); // end
             $table->string('photo')->nullable();
             $table->string('job_number'); // end
             $table->date('birthdate')->nullable();

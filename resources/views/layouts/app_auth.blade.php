@@ -35,6 +35,8 @@ dir="ltr"
     <!-- Sweet Alert-->
     <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('assets/bootstrap-datetimepicker.css?v2') }}" rel="stylesheet">
 
     @yield('style')
     @if (app()->getLocale() == "ar")
@@ -46,6 +48,9 @@ dir="ltr"
         .checkbox2_item i {
             left: inherit;
             right: -4px;
+        }
+        .employee_name.ar{
+            display: block;
         }
     </style>
     <script>
@@ -271,6 +276,23 @@ dir="ltr"
                             </a>
                         </li>
                         @endif
+
+                        @isset(auth()->user()->employee)
+                        @if (auth()->user()->employee->approvalstaff)
+                        <li>
+                            <a href="/request_employees" class=" waves-effect">
+                                <i class="dripicons-user-group"></i>
+                                @if (count(auth()->user()->employee->requests_employees) > 0)
+                                    <span  class="badge rounded-pill bg-info float-end" style="height: 20px; width: 20px; line-height: 16px; font-size: 12px;">
+                                        {{ count(auth()->user()->employee->requests_employees) }}
+                                    </span>
+                                @endif
+                                <span>{{__('Staff requests')}}</span>
+                            </a>
+                        </li>
+                        @endif
+                        @endisset
+                        
                         
 
 
@@ -291,6 +313,9 @@ dir="ltr"
                                 <li><a href="/job">{{ __('Jobs') }}</a></li>
                                 <li><a href="/setting">{{ __('General Settings') }}</a></li>
                                 <li><a href="/allowance">{{ __('Allowances') }}</a></li>
+                                <li><a href="/workshift">{{ __('Workshift') }}</a></li>
+                                <li><a href="/attendances">{{ __('Attendance') }}</a></li>
+                                <li><a href="/approvalstaff">{{ __('Approvalstaff') }}</a></li>
                                 
                                 
                             </ul>
@@ -353,13 +378,12 @@ dir="ltr"
     <!-- Countdown js -->
     <script src="{{ asset('assets/js/pages/coming-soon.init.js') }}"></script>
 
-    @yield('script')
-
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/ajax.form.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
 
-
+    @yield('script')
     
     @yield('script2')
     @yield('models')

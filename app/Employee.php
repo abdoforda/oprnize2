@@ -21,15 +21,29 @@ class Employee extends Model
         static::addGlobalScope(new CompanyScope());
     }
 
+    public function approvalstaff(){
+        return $this->hasOne(Approvalstaff::class);
+    }
 
     public function requests()
     {
         return $this->hasMany(Myrequest::class);
     }
+
+    public function requests_employees()
+    {
+        $items = $this->hasMany(Myrequest::class, 'show_employee');
+        return $items->where('status', 'pending');
+    }
     
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function attendance()
+    {
+        return $this->belongsTo(Attendance::class);
     }
     
 

@@ -18,11 +18,6 @@
                             </ol>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="float-end d-none d-sm-block">
-                            <a href="/request/create" class="btn btn-success">{{__('New Request')}}</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -41,7 +36,7 @@
 
                                 <h4 class="header-title">{{ __('Requests') }}</h4>
                                 <p class="card-title-desc">
-                                    {{__('You can add and edit Requests from this page')}}
+                                    {{__('These are the employees requests')}}
                                 </p>
 
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
@@ -70,14 +65,8 @@
                                             <td style="text-align: center;">{{ $item->myvacation->start }} <br /> {{ __('To') }} <br /> {{ $item->myvacation->end }}</td>
                                             <td>{{ $item->myvacation->visa }} <br/> {{ $item->myvacation->ticket }} <br/> {{ $item->myvacation->pay_in_advance }}</td>
                                             <td>
-                                                @if ($item->status == "success")
-                                                    <center>
-                                                        {{ __('Your request has been accepted') }}
-                                                    </center>
-                                                @else
-                                                <button onclick="delete_tr(this,'requests','updater{{$index}}',)" data-id="{{ $item->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
-                                                @endif
-                                                
+                                                <button onclick="update_request(this,'requests','updater{{$index}}','approval')" data-id="{{ $item->id }}" type="button" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Approval')}}</button>
+                                                <button onclick="update_request(this,'requests','updater{{$index}}','cancel')" data-id="{{ $item->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Cancel')}}</button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -126,5 +115,33 @@
 </script>
 @endif
 
+<script>
+
+    function update_request(thiss,table,idd,status){
+        
+
+    var thiss = $(thiss);
+    var id = thiss.data('id');
+    
+    Swal.fire({
+        title: lang ? "تأكيد العملية" : "Are you sure?",
+        icon: "warning",
+        showCancelButton: !0,
+        confirmButtonColor: "#1cbb8c",
+        cancelButtonColor: "#f14e4e",
+        confirmButtonText: lang ? "نعم" : "Yes",
+        cancelButtonText: lang ? "إلغاء" : "Cancel",
+    }).then(function(t) {
+        if(t.value){
+            $.get('/update_request',{id,status},function(e){
+                $("#"+idd).fadeOut(500);
+            });
+        }
+    })
+
+
+    }
+
+</script>
 
 @endsection

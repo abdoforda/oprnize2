@@ -50,6 +50,10 @@
     box-shadow: 2px 2px 6px 0px #0000001c;
 }
 
+.employee_name{
+    display: none;
+}
+
 input.hide{
     display: none;
 }

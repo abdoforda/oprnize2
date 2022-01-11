@@ -37,6 +37,14 @@ class Company extends Model
         return $this->hasMany(Vacation::class);
     }
 
+    public function approvalstaffs(){
+        return $this->hasMany(Approvalstaff::class);
+    }
+
+    public function workshifts(){
+        return $this->hasMany(Workshift::class);
+    }
+
     public function allowances(){
         return $this->hasMany(Allowance::class);
     }
