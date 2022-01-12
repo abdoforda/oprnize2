@@ -146,11 +146,26 @@
                                                             </div><!-- input-group -->
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="validationCustom03" class="form-label">{{__('Expiry date')}}</label>
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom03" class="form-label">{{__('Release date')}} {{__('Hijri')}} </label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control hijri-date-default" />
+                                                                <input type="text" @isset($em) value="{{ $em->id_issue_date_hijri }}" @endisset name="id_issue_date_hijri" class="form-control hijri-date-default" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="mb-3">
+                                                            <label for="validationCustom03" class="form-label">{{__('Expiry date')}}  {{__('Hijri')}} </label>
+                                                            <div class="input-group">
+                                                                <input type="text" @isset($em) value="{{ $em->id_expire_date_hijri }}" @endisset name="id_expire_date_hijri" class="form-control hijri-date-default" />
                                                             </div>
                                                         </div>
                                                     </div>

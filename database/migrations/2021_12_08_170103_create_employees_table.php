@@ -54,6 +54,8 @@ class CreateEmployeesTable extends Migration
             $table->string('password')->nullable(); // end
             $table->timestamps();
             $table->softDeletes();
+            $table->string('id_issue_date_hijri')->nullable(); // end
+            $table->string('id_expire_date_hijri')->nullable(); // end
         });
     }
 

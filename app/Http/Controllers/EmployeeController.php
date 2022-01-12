@@ -89,6 +89,8 @@ class EmployeeController extends Controller
             //'employment_type' => ['required'],
             'password' => ['required','confirmed'],
             'password_confirmation' => ['required'],
+            'id_issue_date_hijri' => ['required'],
+            'id_expire_date_hijri' => ['required'],
 
         ]);
         
@@ -127,6 +129,8 @@ class EmployeeController extends Controller
         $em->trans_value = $request->trans_value;
         $em->trans_percentage = $request->trans_percentage;
         $em->contract_start_date = $request->contract_start_date;
+        $em->id_issue_date_hijri = $request->id_issue_date_hijri;
+        $em->id_expire_date_hijri = $request->id_expire_date_hijri;
         $em->save();
 
 
@@ -244,6 +248,8 @@ class EmployeeController extends Controller
             //'passport_expire_date' => ['required'],
             //'contract_type' => ['required'],
             //'employment_type' => ['required'],
+            'id_issue_date_hijri' => ['required'],
+            'id_expire_date_hijri' => ['required'],
 
         ]);
         
@@ -282,6 +288,8 @@ class EmployeeController extends Controller
         $em->trans_value = $request->trans_value;
         $em->trans_percentage = $request->trans_percentage;
         $em->contract_start_date = $request->contract_start_date;
+        $em->id_issue_date_hijri = $request->id_issue_date_hijri;
+        $em->id_expire_date_hijri = $request->id_expire_date_hijri;
         $em->save();
 
         foreach($em->allowances as $is){
