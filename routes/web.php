@@ -52,10 +52,13 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::resource('department', 'DepartmentController');
         Route::get('get_sections_from_department_id', 'SectionController@get_sections_from_department_id');
         Route::get('get_jobs_from_section_id', 'JobController@get_jobs_from_section_id');
-        
+        Route::get('update_department_admin', 'DepartmentController@update_department_admin');
+
         //sections
         Route::resource('section', 'SectionController');
         Route::get('update_department', 'SectionController@update_department');
+        Route::get('update_section_admin', 'SectionController@update_section_admin');
+        
         
         //jobs
         Route::resource('job', 'JobController');
@@ -84,6 +87,10 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::get('/update_request', 'MyrequestController@update_request');
         Route::resource('/approvalstaff', 'ApprovalstaffController');
         Route::get('/approval_staff_update', 'ApprovalstaffController@approval_staff_update');
+        Route::get('/update_approvalstaffs_employee', 'ApprovalstaffController@update_approvalstaffs_employee');
+        Route::get('/update_approvalstaffs_section', 'ApprovalstaffController@update_approvalstaffs_section');
+        Route::get('/update_approvalstaffs_manger', 'ApprovalstaffController@update_approvalstaffs_manger');
+        Route::get('/delete_approvalstaff', 'ApprovalstaffController@delete_approvalstaff');
         Route::get('/view', 'MyrequestController@view');
 
         //work shift

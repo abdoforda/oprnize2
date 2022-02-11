@@ -19,6 +19,7 @@ class CreateSectionsTable extends Migration
             $table->string('name_ar');
             $table->foreignId('company_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('department_id')->nullable()->constrained()->onDelete('cascade');
+            $table->integer('employee_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

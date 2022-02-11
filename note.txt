@@ -1,4 +1,15 @@
-2021_12_08_170102_create_workshifts_table
-2022_01_07_081904_create_attendances_table
-employee   => workshift_id - integer
-myrequests => show_employee - integer
+ALTER TABLE `departments` ADD `employee_id` INT NULL AFTER `deleted_at`;
+ALTER TABLE `sections` ADD `employee_id` INT NULL AFTER `deleted_at`;
+ALTER TABLE `myrequests` ADD `employees_showing` VARCHAR(250) NULL AFTER `show_employee`;
+
+
+type appfofstaf
+manger appfofstaf
+
+إضافة مدير لكل إدارة
+وإضافة مدير لكل قسم داخل الإدارة
+نحتاج إننا نضيف مسار الموافقات بدل الموظف نختار المدراء
+
+
+استبعاد جواز السفر للجميع
+تاريخ إنتهاء الهوية إلزامي لغير السعودين

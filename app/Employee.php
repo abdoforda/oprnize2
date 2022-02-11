@@ -41,6 +41,11 @@ class Employee extends Model
         return $this->hasOne(User::class);
     }
 
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+
     public function attendance()
     {
         return $this->belongsTo(Attendance::class);

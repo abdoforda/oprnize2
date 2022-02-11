@@ -17,6 +17,8 @@ class CreateApprovalstaffsTable extends Migration
             $table->id();
             $table->foreignId('company_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('employee_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('manager')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

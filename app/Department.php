@@ -18,6 +18,10 @@ class Department extends Model
         return $this->hasMany(Section::class);
     }
 
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
+
     protected static function booted()
     {
         static::addGlobalScope(new CompanyScope());

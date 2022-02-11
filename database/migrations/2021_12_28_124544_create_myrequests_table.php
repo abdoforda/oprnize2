@@ -21,6 +21,7 @@ class CreateMyrequestsTable extends Migration
             $table->integer('model_id');
             $table->string('status')->default('pending');
             $table->integer('show_employee')->nullable();
+            $table->string('employees_showing')->nullable();
             $table->timestamps();
         });
     }

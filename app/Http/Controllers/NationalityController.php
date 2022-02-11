@@ -16,7 +16,7 @@ class NationalityController extends Controller
     public function index()
     {
 
-        $permission = Permission::create(['name' => 'edit articles']);
+        //$permission = Permission::create(['name' => 'edit articles']);
         $user = auth()->user();
         //$user->givePermissionTo('edit articles');
         

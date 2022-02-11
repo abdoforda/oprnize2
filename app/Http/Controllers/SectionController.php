@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Employee;
 use App\Section;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,16 @@ class SectionController extends Controller
             ];
         });
 
-        return view('section.index',compact('nationalities','departments','departments2'));
+        $employees = Employee::all();
+
+        $employees = $employees->map(function($name){
+            return [
+                'value' => $name->id,
+                'text' => $name->name,
+            ];
+        });
+
+        return view('section.index',compact('nationalities','departments','departments2','employees'));
     }
 
     /**
@@ -133,6 +143,19 @@ class SectionController extends Controller
             $se = Section::findOrFail($request->pk);
             if($se){
                 $se->department_id = $request->value;
+                $se->save();
+            }
+        }
+        return "ok";
+    }
+
+    public function update_section_admin(Request $request){
+
+        $de = Employee::findOrFail($request->value);
+        if($de){
+            $se = Section::findOrFail($request->pk);
+            if($se){
+                $se->employee_id = $request->value;
                 $se->save();
             }
         }

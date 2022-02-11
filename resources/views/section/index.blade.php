@@ -52,6 +52,7 @@
                                             <th>{{__('Name (AR)')}}</th>
                                             <th>{{__('Name (EN)')}}</th>
                                             <th>{{__('Department')}}</th>
+                                            <th>{{__('Admin')}}</th>
                                             <th>{{__('Options')}}</th>
                                         </tr>
                                     </thead>
@@ -62,9 +63,19 @@
                                         <tr id="updater{{$index}}">
                                             <td class="ed_ar">{{ $nationality->name_ar }}</td>
                                             <td class="ed_en">{{ $nationality->name_en }}</td>
-                                            <td >
+                                            <td>
                                                 <a class="inline-department" href="#" data-type="select" data-pk="{{ $nationality->id }}" data-value="{{ $nationality->department->id }}" data-url="/update_department" >{{ $nationality->department->name }}</a>
-                                                </td>
+                                            </td>
+
+                                            <td>
+                                                <a class="inline-department2" href="#" data-type="select" 
+                                                data-pk="{{ $nationality->id }}" 
+                                                @isset($nationality->employee)
+                                                data-value="{{ $nationality->employee->id }}" 
+                                                @endisset
+                                                
+                                                data-url="/update_section_admin" >{{ ($nationality->employee) ? $nationality->employee->name : ' - - - - -' }}</a>
+                                            </td>
                                             <td>
                                                 <a onclick="update_nationality(this,'updater{{$index}}')" data-id="{{ $nationality->id }}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
                                                 <button onclick="delete_tr(this,'sections','updater{{$index}}',)" data-id="{{ $nationality->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
@@ -138,12 +149,16 @@ function update_nationality(thiss,id){
                                             <td  class="ed_en">${data.responseJSON.name_en}</td>
                                             <td>${data.responseJSON.department.name_en} - ${data.responseJSON.department.name_ar}</td>
                                             <td>
+                                                <a class="inline-department2" href="#" data-type="select" data-pk="${data.responseJSON.id}" data-value="" data-url="/update_section_admin" >- - - - - - -</a>
+                                            </td>
+                                            <td>
                                                 <a onclick="update_nationality(this,'asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
                                                 <button onclick="delete_tr(this,'sections','asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>`);
                                         $("#datatable").DataTable();
                         $(".clcl").trigger('click');
+                        update_select();
                     }
                     
                 }
@@ -172,15 +187,33 @@ function update_nationality(thiss,id){
 
 
 
-        var data2 = "{{ $departments2 }}";
-        var js = JSON.parse(data2.replace(/&quot;/g,'"'));
+        function update_select(){
+            
+            var data2 = "{{ $departments2 }}";
+            var js = JSON.parse(data2.replace(/&quot;/g,'"'));
 
-        $(".inline-department").editable({
-            prepend: "not selected",
-            mode: "inline",
-            inputclass: "form-control-sm",
-            source: js
-        });
+            $(".inline-department").editable({
+                prepend: "not selected",
+                mode: "inline",
+                inputclass: "form-control-sm",
+                source: js
+            });
+
+            var data2 = "{{ $employees }}";
+            var js = JSON.parse(data2.replace(/&quot;/g,'"'));
+
+            $(".inline-department2").editable({
+                prepend: "not selected",
+                mode: "inline",
+                inputclass: "form-control-sm",
+                source: js
+            });
+        }
+
+        update_select();
+        
+
+
 </script>
 
 @if (app()->getLocale() == "ar")

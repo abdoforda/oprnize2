@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Employee;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -18,7 +19,29 @@ class DepartmentController extends Controller
         ->orderBy('id','DESC')
         ->get();
 
-        return view('department.index',compact('nationalities'));
+        $employees = Employee::all();
+
+        $employees = $employees->map(function($name){
+            return [
+                'value' => $name->id,
+                'text' => $name->name,
+            ];
+        });
+
+        return view('department.index',compact('nationalities','employees'));
+    }
+
+    public function update_department_admin(Request $request){
+
+        $de = Employee::findOrFail($request->value);
+        if($de){
+            $se = Department::findOrFail($request->pk);
+            if($se){
+                $se->employee_id = $request->value;
+                $se->save();
+            }
+        }
+        return "ok";
     }
 
     /**
@@ -94,6 +117,7 @@ class DepartmentController extends Controller
         if($na->company_id != auth()->user()->company->id){
             return;
         }
+
         $na->name_ar = $request->name_ar;
         $na->name_en = $request->name_en;
         $na->save();

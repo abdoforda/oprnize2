@@ -52,11 +52,23 @@ dir="ltr"
         .employee_name.ar{
             display: block;
         }
+        .form-control.form-control-sm{
+            width: 160px;
+            float: right;
+            margin-left: 8px;
+        }
     </style>
     <script>
         var lang = "ar";
     </script>
     @else
+    <style>
+        .form-control.form-control-sm{
+            width: 160px;
+            float: left;
+            margin-right: 8px;
+        }
+    </style>
     <script>
         var lang = "en";
     </script>
@@ -277,8 +289,8 @@ dir="ltr"
                         </li>
                         @endif
 
-                        @isset(auth()->user()->employee)
-                        @if (auth()->user()->employee->approvalstaff)
+
+                        @if (auth()->user()->employee)
                         <li>
                             <a href="/request_employees" class=" waves-effect">
                                 <i class="dripicons-user-group"></i>
@@ -291,7 +303,7 @@ dir="ltr"
                             </a>
                         </li>
                         @endif
-                        @endisset
+                        
                         
                         
 

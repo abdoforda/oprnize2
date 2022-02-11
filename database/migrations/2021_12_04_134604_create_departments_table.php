@@ -18,6 +18,7 @@ class CreateDepartmentsTable extends Migration
             $table->string('name_en');
             $table->string('name_ar');
             $table->foreignId('company_id')->nullable()->constrained()->onDelete('cascade');
+            $table->integer('employee_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

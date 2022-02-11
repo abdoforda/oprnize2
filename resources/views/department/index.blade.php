@@ -51,6 +51,7 @@
                                         <tr>
                                             <th>{{__('Name (AR)')}}</th>
                                             <th>{{__('Name (EN)')}}</th>
+                                            <th>{{__('Admin')}}</th>
                                             <th>{{__('Options')}}</th>
                                         </tr>
                                     </thead>
@@ -62,7 +63,16 @@
                                             <td class="ed_ar">{{ $nationality->name_ar }}</td>
                                             <td class="ed_en">{{ $nationality->name_en }}</td>
                                             <td>
-                                                <a onclick="update_nationality(this,'updater{{$index}}')" data-id="{{ $nationality->id }}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
+                                                <a class="inline-department" href="#" data-type="select" 
+                                                data-pk="{{ $nationality->id }}" 
+                                                @isset($nationality->employee)
+                                                data-value="{{ $nationality->employee->id }}" 
+                                                @endisset
+                                                
+                                                data-url="/update_department_admin" >{{ ($nationality->employee) ? $nationality->employee->name : '' }}</a>
+                                            </td>
+                                            <td>
+                                                <a onclick="update_nationality(this,'updater{{$index}}')" data-employee_id="{{ $nationality->employee_id }}" data-id="{{ $nationality->id }}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
                                                 <button onclick="delete_tr(this,'departments','updater{{$index}}',)" data-id="{{ $nationality->id }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>
@@ -100,6 +110,7 @@
 <!-- Responsive examples -->
 <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap-editable/js/index.js') }}"></script>
 
 <script>
 var idd = "";
@@ -109,11 +120,24 @@ function update_nationality(thiss,id){
     idd = id;
     var show_name_ar = thiss.closest('tr').find('.ed_ar').text();
     var show_name_en = thiss.closest('tr').find('.ed_en').text();
+    sel_op(thiss.data('employee_id'));
     $("#edit_name_ar").val(show_name_ar);
     $("#edit_name_en").val(show_name_en);
     $(".ajax_nationality2").attr('action','/department/'+thiss.data('id'));
 
 }
+
+function sel_op(te){
+    $('.sel_op').each(function(index, element) {
+		var t = $(this).attr('value');
+		if(t == te){
+			var val_op = $(this).val();
+			$(this).closest("select").val(val_op);
+		}
+	});
+}
+
+
    $(document).ready(function(e) {
    var domain = "{{ request()->getHost() }}";
    $(".ajax_nationality").ajaxForm({
@@ -130,12 +154,16 @@ function update_nationality(thiss,id){
                                             <td  class="ed_ar">${data.responseJSON.name_ar}</td>
                                             <td  class="ed_en">${data.responseJSON.name_en}</td>
                                             <td>
+                                                <a class="inline-department" href="#" data-type="select" data-pk="${data.responseJSON.id}" data-value="" data-url="/update_department_admin" >- - - - - - -</a>
+                                            </td>
+                                            <td>
                                                 <a onclick="update_nationality(this,'asdww${data.responseJSON.id}')" data-id="${data.responseJSON.id}"><button type="button" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" class="btn btn-info btn-sm waves-effect waves-light"><i class="fas fa-user-edit"></i> {{__('Edit')}}</button></a>
                                                 <button onclick="delete_tr(this,'departments','asdww${data.responseJSON.id}',)" data-id="${data.responseJSON.id}" type="button" class="btn btn-danger btn-sm waves-effect waves-light"><i class="fas fa-trash"></i> {{__('Delete')}}</button>
                                             </td>
                                         </tr>`);
                                         $("#datatable").DataTable();
                         $(".clcl").trigger('click');
+                        update_select();
                     }
                     
                 }
@@ -161,6 +189,21 @@ function update_nationality(thiss,id){
             });
 
         });
+
+
+        function update_select(){
+            var data2 = "{{ $employees }}";
+            var js = JSON.parse(data2.replace(/&quot;/g,'"'));
+
+            $(".inline-department").editable({
+                prepend: "not selected",
+                mode: "inline",
+                inputclass: "form-control-sm",
+                source: js
+            });
+        }
+        update_select();
+
 </script>
 
 @if (app()->getLocale() == "ar")
@@ -200,6 +243,7 @@ aria-hidden="true">
                         <input class="form-control" type="text" name="name_ar" id="example-text-input">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label">{{__('Department Name (EN)')}}</label>
                     <div class="col-sm-10">
@@ -217,9 +261,7 @@ aria-hidden="true">
 
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label"></label>
-                    <div class="col-sm-10 text-center message">
-
-                    </div>
+                    <div class="col-sm-10 text-center message"></div>
                 </div>
 
             </form>
@@ -257,6 +299,7 @@ aria-hidden="true">
                         <input class="form-control" type="text" name="name_en" id="edit_name_en">
                     </div>
                 </div>
+
 
                 <div class="row mb-3">
                     <label for="example-text-input" class="col-sm-2 col-form-label"></label>

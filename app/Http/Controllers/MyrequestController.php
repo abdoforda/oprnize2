@@ -34,7 +34,35 @@ class MyrequestController extends Controller
         $req = Myrequest::find($request->id);
         if($req->show_employee == auth()->user()->employee->id){
 
-            $last = auth()->user()->company->approvalstaffs->last();
+            $ex = explode(',',$req->employees_showing);
+
+            
+            $last = 'asd';
+            $last2 = '';
+            $x =0;
+            foreach($ex as $item){
+                $x++;
+                if($item == $req->show_employee){
+                    $last = $ex[$x];
+                    break;
+                }
+            }
+            
+
+            $checked = 0;
+            foreach($ex as $item){
+                if($checked == 1){
+                    if($item != ''){
+                        $last2 .= $item.',';
+                    }
+                }
+                if($item == $req->show_employee){
+                    if($item == $req->show_employee){
+                        $checked = 1;
+                    }
+                }
+            }
+
 
             if($request->status == "cancel"){
                 $req->status = 'reject';
@@ -42,21 +70,14 @@ class MyrequestController extends Controller
                 return "ok";
             }
 
-            if($last->employee_id == auth()->user()->employee->id){
+            if($last == null){
                 $req->status = 'success';
                 $req->save();
                 return "ok";
             }
 
-            $em_app = auth()->user()->employee->approvalstaff;
-            $next = Approvalstaff::where([
-                ['id', '>', $em_app->id],
-                ['company_id', auth()->user()->company->id],
-            ])->min('id');
-
-            $next = Approvalstaff::find($next);
-
-            $req->show_employee = $next->employee_id;
+            $req->show_employee = $last;
+            $req->employees_showing = $last2;
             $req->save();
             return "ok";
 
@@ -145,12 +166,32 @@ class MyrequestController extends Controller
                 $myvacation->ticket = $request->has('ticket');
                 $myvacation->save();
 
+
+
+
+                $ids = '';
+                foreach(auth()->user()->company->approvalstaffs as $item01){
+                    if($item01->manager == 'true'){
+                        $ids .= auth()->user()->employee->section->employee->id.',';
+                    }elseif($item01->type == 'employee'){
+                        $ids .= $item01->employee_id.',';
+                    }elseif($item01->type == 'section'){
+                        $section = $item01->employee;
+                        $ids .= $section->employee->id.',';
+                    }
+                    
+                }
+
+                $first_show = explode(',',$ids);
+                $first_show = $first_show[0];
+
                 $myrequest = new Myrequest();
                 $myrequest->company_id = $company_id;
                 $myrequest->employee_id = auth()->user()->employee->id;
                 $myrequest->type = "leave";
                 $myrequest->model_id = $myvacation->id;
-                $myrequest->show_employee = auth()->user()->company->approvalstaffs->first()->employee_id;
+                $myrequest->show_employee = $first_show;
+                $myrequest->employees_showing = $ids;
                 $myrequest->save();
 
                 return $myrequest;
