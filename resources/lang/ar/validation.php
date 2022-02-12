@@ -162,5 +162,9 @@ return [
         'id_num'             => 'رقم الهوية',
         'annual_balance'             => 'الرصيد السنوي',
         'contract_end_date'             => 'تاريخ نهاية الخدمة',
+        "id_issue_date_hijri" => "تاريخ اﻹصدار هجري",
+        "id_expire_date_hijri" => "تاريخ الانتهاء هجري",
+        "id_issue_date" => "تاريخ اﻹصدار    ",
+        "id_expire_date" => "تاريخ الانتهاء",
     ],
 ];

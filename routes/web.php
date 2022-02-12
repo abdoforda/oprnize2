@@ -35,9 +35,12 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
 
     Route::middleware(['auth','CheckSettings'])->group(function () {
 
-        Route::get('/', function ($account) {
-            return redirect('/setting');
-        });
+        Route::get('/', 'DashboardController@index');
+
+        //user
+        Route::get('edit_password', 'UserController@edit_password');
+        Route::post('edit_password', 'UserController@edit_password_post');
+        
 
         Route::get('/logout', 'SettingController@logout');
         Route::get('/permission/{employee}', 'SettingController@permission');

@@ -30,6 +30,12 @@ class CheckSettings
             $false = true;
         }
 
+        if(auth()->user()){
+            if(auth()->user()->change_password && $request->getRequestUri() != "/edit_password"){
+                return redirect('/edit_password')->with('warning',  __('Continue to use You must change your password Your own password'));
+            }
+        }
+
         if($false && $request->getRequestUri() != "/setting" && $request->getRequestUri() != "/nationality"){
             return redirect('/setting');
         }

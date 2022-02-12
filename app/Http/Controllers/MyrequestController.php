@@ -74,6 +74,7 @@ class MyrequestController extends Controller
                 $req->status = 'success';
                 $req->save();
                 return "ok";
+                
             }
 
             $req->show_employee = $last;

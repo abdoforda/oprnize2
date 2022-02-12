@@ -46,6 +46,9 @@ $(".euhgiuerhgerg").keyup(function (e) {
     console.log(v);
     if (v != "") {
         if (v.charAt(0) == 1) {
+            $(".country02").find("input").prop("checked", false);
+            $(".country02").find(".choosse").removeClass("clickable");
+            $(".country02").find(".choosse").find("i").hide(0);
             $(".country02").find("input[value='1']").prop("checked", true);
             $(".country02")
                 .find("input[value='1']")

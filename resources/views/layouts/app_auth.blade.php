@@ -177,9 +177,10 @@ dir="ltr"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-7.jpg') }}"
                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">{{ auth()->user()->name }}</span>
+                            <span class="d-none d-xl-inline-block ms-1">{{ auth()->user()->name() }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
+                        
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             <a class="dropdown-item" href="#"><i
@@ -216,8 +217,13 @@ dir="ltr"
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">{{ auth()->user()->name }}</h5>
-                            <span class="font-size-13 text-white-50">Administrator</span>
+                            <h5 class="mt-3 font-size-16 text-white">{{ auth()->user()->name() }}</h5>
+                            @if (auth()->user()->is_admin())
+                            <span class="font-size-13 text-white-50">{{__('Administrator')}}</span>
+                            @else
+                            <span class="font-size-13 text-white-50">{{__('Employee0')}}</span>
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -231,10 +237,9 @@ dir="ltr"
                         <li class="menu-title">Menu</li>
 
                         <li>
-                            <a href="index.html" class="waves-effect">
-                                <i class="dripicons-home"></i><span
-                                    class="badge rounded-pill bg-info float-end">3</span>
-                                <span>Dashboard</span>
+                            <a href="/" class="waves-effect">
+                                <i class="dripicons-home"></i>
+                                <span>{{__('Dashboard')}}</span>
                             </a>
                         </li>
 

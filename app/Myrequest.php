@@ -10,4 +10,8 @@ class Myrequest extends Model
     public function myvacation(){
         return $this->belongsTo(Myvacation::class, "model_id");
     }
+
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
 }

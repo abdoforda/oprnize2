@@ -197,17 +197,28 @@ class Employee extends Model
 
     public function current_balance(){
 
+        $myrequests = Myrequest::where([
+            ['type','leave'],
+            ['employee_id',$this->id],
+            ['status','success'],
+        ])->get();
+        
+        $number_of_vacation_days = 0;
+        foreach($myrequests as $myrequest){
+            $number_of_vacation_days += $myrequest->myvacation->the_number_of_days();
+        }
+
         if($this->available_balance == NULL){
             $date = Carbon::parse($this->contract_start_date);
             $now  = Carbon::now();
             $diff = $date->diffInDays($now);
-            return ($diff * ($this->annual_balance / 365));
+            return ($diff * ($this->annual_balance / 365)) - $number_of_vacation_days;
         }
 
         $date = Carbon::parse($this->created_at);
         $now  = Carbon::now();
         $diff = $date->diffInDays($now);
-        return ($diff * ($this->annual_balance / 365)) + $this->available_balance;
+        return (($diff * ($this->annual_balance / 365)) + $this->available_balance)  - $number_of_vacation_days;
 
     }
 

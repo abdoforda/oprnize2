@@ -6,6 +6,7 @@ use App\Allowance;
 use App\Department;
 use App\Employee;
 use App\Nationality;
+use App\Rules\UniqueJobNumber;
 use App\Section;
 use App\User;
 use Illuminate\Http\Request;
@@ -60,8 +61,8 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar' => ['required'],
-            'name_en' => ['required'],
+            'name_ar' => ['required','unique:employees'],
+            'name_en' => ['required','unique:employees'],
             
             'contract_start_date' => ['required'],
             'department_id' => ['required'],
@@ -77,11 +78,10 @@ class EmployeeController extends Controller
             'contract_end_date' => ['required'],
             'annual_balance' => ['required'],
             'id_num' => ['required','unique:employees','max:10','min:10'],
-            'job_number' => ['required','unique:employees'],
+            'job_number' => ['required', new UniqueJobNumber()],
             'phone' => ['required','unique:employees'],
             'email' => ['required','unique:employees'],
-            //'id_issue_date' => ['required'],
-            //'id_expire_date' => ['required'],
+
             //'passport_num' => ['required'],
             //'passport_issue_date' => ['required'],
             //'passport_expire_date' => ['required'],
@@ -89,8 +89,10 @@ class EmployeeController extends Controller
             //'employment_type' => ['required'],
             'password' => ['required','confirmed'],
             'password_confirmation' => ['required'],
-            'id_issue_date_hijri' => ['required'],
-            'id_expire_date_hijri' => ['required'],
+            'id_issue_date' => ['required_without:id_issue_date_hijri'],
+            'id_expire_date' => ['required_without:id_expire_date_hijri'],
+            'id_issue_date_hijri' => ['required_without:id_issue_date'],
+            'id_expire_date_hijri' => ['required_without:id_expire_date'],
 
         ]);
         
@@ -223,8 +225,8 @@ class EmployeeController extends Controller
 
         $request->validate([
             'id_em' => ['required'],
-            'name_ar' => ['required'],
-            'name_en' => ['required'],
+            'name_ar' => ['required', Rule::unique('employees')->ignore($request->id_em)],
+            'name_en' => ['required', Rule::unique('employees')->ignore($request->id_em)],
             'contract_start_date' => ['required'],
             'department_id' => ['required'],
             'section_id' => ['required'],
@@ -241,15 +243,16 @@ class EmployeeController extends Controller
             'job_number' => ['required',Rule::unique('employees')->ignore($request->id_em)],
             'phone' => ['required',Rule::unique('employees')->ignore($request->id_em)],
             'email' => ['required',Rule::unique('employees')->ignore($request->id_em)],
-            //'id_issue_date' => ['required'],
-            //'id_expire_date' => ['required'],
+            
             //'passport_num' => ['required'],
             //'passport_issue_date' => ['required'],
             //'passport_expire_date' => ['required'],
             //'contract_type' => ['required'],
             //'employment_type' => ['required'],
-            'id_issue_date_hijri' => ['required'],
-            'id_expire_date_hijri' => ['required'],
+            'id_issue_date' => ['required_without:id_issue_date_hijri'],
+            'id_expire_date' => ['required_without:id_expire_date_hijri'],
+            'id_issue_date_hijri' => ['required_without:id_issue_date'],
+            'id_expire_date_hijri' => ['required_without:id_expire_date'],
 
         ]);
         

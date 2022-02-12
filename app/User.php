@@ -59,6 +59,15 @@ class User extends Authenticatable
         return false;
     }
 
+    public function name(){
+        if($this->employee){
+            return $this->employee->name;
+        }
+        return $this->name;
+    }
+
+
+
     
 
 }
