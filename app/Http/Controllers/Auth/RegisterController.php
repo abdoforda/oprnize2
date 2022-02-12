@@ -107,7 +107,7 @@ class RegisterController extends Controller
         ]);
 
         $company = new Company();
-        $company->domain = $request->domain;
+        $company->domain = strtolower($request->domain);
         $company->user_id = $user->id;
         $company->save();
 
