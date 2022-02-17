@@ -156,6 +156,12 @@
                         console.log(data.responseJSON.errors);
                     }else if(data.status == 201){
                         $(".message").hide(0).html("{{__('Your company has been successfully registered, and the password has been sent to your email with login details')}}").fadeIn();
+                        Swal.fire(
+                        "{{ __('Good job') }}",
+                        "{{__('Your company has been successfully registered, and the password has been sent to your email with login details')}}",
+
+                        'success'
+                        );
                         setTimeout(() => {
                             window.location.href = "http://"+data.responseJSON.domain+"."+domain;
                         }, 15000);
