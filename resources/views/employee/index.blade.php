@@ -20,6 +20,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="float-end d-none d-sm-block">
+                            <a href="/export_employee" class="btn btn-warning">{{__('Export Employees')}}</a>
                             <a href="/employee/create" class="btn btn-success">{{__('New Employee')}}</a>
                         </div>
                     </div>

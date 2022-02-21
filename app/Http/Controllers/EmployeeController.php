@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Allowance;
 use App\Department;
 use App\Employee;
+use App\Exports\EmployeeExport;
 use App\Nationality;
 use App\Rules\UniqueJobNumber;
 use App\Section;
@@ -12,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeController extends Controller
 {
@@ -21,6 +23,10 @@ class EmployeeController extends Controller
         $this->middleware('DeSeJo');
     }
 
+    public function export() 
+    {
+        return Excel::download(new EmployeeExport, 'employees.xlsx');
+    }
     
     /**
      * Display a listing of the resource.

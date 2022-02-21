@@ -79,6 +79,7 @@ Route::domain('{account}.'.env('DOMAIN','oprnize.com'))->group(function ($accoun
         Route::resource('/employee', 'EmployeeController');
         Route::post('/employee_update', 'EmployeeController@update2');
         Route::get('/search_employee', 'EmployeeController@search_employee');
+        Route::get('/export_employee', 'EmployeeController@export');
 
         //Payroll + deductions
         Route::resource('/deduction', 'DeductionController');

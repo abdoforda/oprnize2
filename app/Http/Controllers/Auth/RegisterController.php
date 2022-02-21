@@ -103,7 +103,8 @@ class RegisterController extends Controller
             'name' => "Demo",
             'email' => $request->email,
             'domain' => strtolower($request->domain),
-            'password' => Hash::make($pass)
+            'password' => Hash::make($pass),
+            'change_password' => true
         ]);
 
         $company = new Company();
